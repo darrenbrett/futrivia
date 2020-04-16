@@ -16,7 +16,7 @@ export class ScorersPage implements OnInit {
     this.scorers = await this.scorersService.getScorers();
   }
 
-  async ngOnInit() {
-    await this.getScorers();
+  ngOnInit() {
+    this.getScorers();
   }
 }

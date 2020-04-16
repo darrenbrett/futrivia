@@ -29,7 +29,7 @@ export class AppComponent implements OnInit {
     },
     {
       title: 'Teams',
-      url: '/folder/Teams',
+      url: '/teams',
       icon: 'shirt'
     },
     {
@@ -38,7 +38,6 @@ export class AppComponent implements OnInit {
       icon: 'walk'
     }
   ];
-  public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
 
   constructor(
     private platform: Platform,
