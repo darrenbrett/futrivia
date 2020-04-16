@@ -1,0 +1,7 @@
+{
+  "name": "evpsl-live",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
