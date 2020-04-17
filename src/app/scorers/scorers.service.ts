@@ -12,7 +12,7 @@ export class ScorersService {
 
   async getScorers() {
     const req = `players/scorers`;
-    this.scorers = await this.apiService.getRequest(req);
+    this.scorers = await this.apiService.sendRequest(req);
     return this.scorers;
   }
 

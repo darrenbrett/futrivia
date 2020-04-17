@@ -6,13 +6,19 @@ import { ApiService } from '../api/api.service';
 })
 export class TeamsService {
 
-  teams: [];
-
   constructor(private apiService: ApiService) { }
 
   async getTeams() {
+    let teams: [];
     const req = `teams`;
-    this.teams = await this.apiService.getRequest(req);
-    return this.teams;
+    teams = await this.apiService.sendRequest(req);
+    return teams;
+  }
+
+  async getTeamByLocation(location) {
+    let team: any = {};
+    const req = `teams/${location}`;
+    team = await this.apiService.sendRequest(req);
+    return team;
   }
 }

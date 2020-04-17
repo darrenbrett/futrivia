@@ -9,7 +9,7 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
 
-  getRequest(req: string, params?: string) {
+  sendRequest(req: string, params?: string) {
     return this.http.get<[]>(`${APIConfig.url}/${req}`).toPromise();
   }
 
