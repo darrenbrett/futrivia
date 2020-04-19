@@ -16,7 +16,6 @@ export class TeamPage implements OnInit {
 
   async getTeamByLocation(location) {
     const team = await this.teamsService.getTeamByLocation(location);
-    console.log('this.team 19: ', this.team);
     return team;
   }
 
@@ -28,6 +27,8 @@ export class TeamPage implements OnInit {
       }
       const location = paramMap.get('location');
       this.team = await this.getTeamByLocation(location.charAt(0).toUpperCase() + location.slice(1));
+      this.players = await this.team.playerRoster;
+      console.log('this.players: ', this.players);
     });
   }
 

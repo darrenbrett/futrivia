@@ -3,14 +3,69 @@
     <ion-buttons slot="start">
       <ion-menu-button class=""></ion-menu-button>
     </ion-buttons>
-    <ion-title>{{ team?.name?.location }} {{ team?.name?.nick }}</ion-title>
+    <ion-title>Team Profile</ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-content>
   <ion-grid>
-    <!-- <ion-row *ngFor="let p of players; let i = index">
-      <ion-col>{{ p.fullName }}</ion-col>
-      <ion-col>{{ p.aggScore }}</ion-col>
-    </ion-row> -->
+    <ion-row class="center-box" style="text-align: center">
+      <ion-col><h3>{{ team?.fullName }}</h3></ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+          <ion-img [src]="team?.lgLogoUrl" class="logo-lg"></ion-img>
+      </ion-col>
+    </ion-row>
+    <ion-item-divider></ion-item-divider>
+    <ion-row>
+      <ion-header class="section-header">Team Details</ion-header>
+    </ion-row>
+    <ion-row>
+      <ion-col class="indented"><span class="grey-text">Founded:</span> {{ team?.entryYear }}</ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="indented"><span class="grey-text">First Season:</span> {{ team?.firstSeason }}</ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="indented"><span class="grey-text">Conference:</span> {{ team?.conference }}</ion-col>
+    </ion-row>
+    <ion-item-divider></ion-item-divider>
+    <ion-row>
+      <ion-header class="section-header">Season Record</ion-header>
+    </ion-row>
+    <ion-row>
+      <ion-col class="indented"><span class="grey-text">Wins:</span> {{ team?.season?.wins }}</ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="indented"><span class="grey-text">Losses:</span> {{ team?.season?.losses }}</ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="indented"><span class="grey-text">Ties:</span> {{ team?.season?.ties }}</ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="indented"><span class="grey-text">Goal Differential:</span> {{ team?.season?.goalDiff }}</ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="indented"><span class="grey-text">Points:</span> {{ team?.season?.points }}</ion-col>
+    </ion-row>
+    <ion-item-divider></ion-item-divider>
+    <ion-row>
+      <ion-header class="section-header">Ownership/Management</ion-header>
+    </ion-row>
+    <ion-row>
+      <ion-col class="indented"><span class="grey-text">Owner:</span> {{ team?.owner?.firstName }} {{ team?.owner?.lastName }}</ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="indented"><span class="grey-text">Coach:</span> {{ team?.coach }}</ion-col>
+    </ion-row>
+    <ion-item-divider></ion-item-divider>
+  </ion-grid>
+  <ion-row>
+    <ion-header class="section-header">Player Roster</ion-header>
+  </ion-row>
+  <ion-grid *ngFor="let p of players; let i = index">
+    <ion-row>
+      <ion-col style="margin-left: 10px;">{{ p.fullName }} <span class="grey-text">({{ p.position }})</span></ion-col>
+    </ion-row>
   </ion-grid>
 </ion-content>
