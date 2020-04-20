@@ -7,7 +7,6 @@ import { TeamsService } from './teams.service';
   styleUrls: ['./teams.page.scss'],
 })
 export class TeamsPage implements OnInit {
-
   teams = [];
 
   constructor(private teamsService: TeamsService) { }

@@ -27,8 +27,7 @@ export class TeamPage implements OnInit {
       }
       const location = paramMap.get('location');
       this.team = await this.getTeamByLocation(location.charAt(0).toUpperCase() + location.slice(1));
-      this.players = await this.team.playerRoster;
-      console.log('this.players: ', this.players);
+      this.players = await this.team.roster;
     });
   }
 

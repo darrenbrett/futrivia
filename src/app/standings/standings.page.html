@@ -19,13 +19,13 @@
       <ion-col>PTS</ion-col>
     </ion-row>
     <ion-row *ngFor="let t of westernStandings; let i = index" class="center-box">
-      <ion-img [src]="t.imgUrl" class="logo-img"></ion-img>
-      <ion-col style="margin-left: 8px;">{{ t.team | teamNameTrunc }}</ion-col>
-      <ion-col style="margin-left: 6px;">{{ t.wins }}</ion-col>
-      <ion-col>{{ t.losses }}</ion-col>
-      <ion-col>{{ t.ties }}</ion-col>
-      <ion-col>{{ t.goalDiff }}</ion-col>
-      <ion-col>{{ t.points }}</ion-col>
+      <ion-img [src]="t.lgLogoUrl" class="logo-img"></ion-img>
+      <ion-col style="margin-left: 8px;">{{ t.name.location | teamNameTrunc }}</ion-col>
+      <ion-col style="margin-left: 6px;">{{ t.season.wins }}</ion-col>
+      <ion-col>{{ t.season.losses }}</ion-col>
+      <ion-col>{{ t.season.ties }}</ion-col>
+      <ion-col>{{ t.season.goalDiff }}</ion-col>
+      <ion-col>{{ t.season.points }}</ion-col>
     </ion-row>
   </ion-grid>
   <ion-item-divider></ion-item-divider>
@@ -40,13 +40,13 @@
       <ion-col>PTS</ion-col>
     </ion-row>
     <ion-row *ngFor="let t of easternStandings; let i = index" class="center-box">
-      <ion-img [src]="t.imgUrl" class="logo-img"></ion-img>
-      <ion-col style="margin-left: 8px;">{{ t.team | teamNameTrunc }}</ion-col>
-      <ion-col style="margin-left: 6px;">{{ t.wins }}</ion-col>
-      <ion-col>{{ t.losses }}</ion-col>
-      <ion-col>{{ t.ties }}</ion-col>
-      <ion-col>{{ t.goalDiff }}</ion-col>
-      <ion-col>{{ t.points }}</ion-col>
+      <ion-img [src]="t.lgLogoUrl" class="logo-img"></ion-img>
+      <ion-col style="margin-left: 8px;">{{ t.name.location | teamNameTrunc }}</ion-col>
+      <ion-col style="margin-left: 6px;">{{ t.season.wins }}</ion-col>
+      <ion-col>{{ t.season.losses }}</ion-col>
+      <ion-col>{{ t.season.ties }}</ion-col>
+      <ion-col>{{ t.season.goalDiff }}</ion-col>
+      <ion-col>{{ t.season.points }}</ion-col>
     </ion-row>
   </ion-grid>
 </ion-content>
