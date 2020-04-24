@@ -15,6 +15,13 @@ export class TeamsService {
     return teams;
   }
 
+  async getTeamLogos() {
+    let teamLogos: [];
+    const req = `teams/logos`;
+    teamLogos = await this.apiService.sendRequest(req);
+    return teamLogos;
+  }
+
   async getTeamByLocation(location) {
     let team: any = {};
     const req = `teams/${location}`;

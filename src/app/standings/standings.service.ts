@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Standings } from './standings.model';
 import { ApiService } from '../api/api.service';
 
 @Injectable({
@@ -12,6 +11,13 @@ export class StandingsService {
   async getStandingsByConference(conference) {
     let standings: any = [];
     const req = `standings/${conference}`;
+    standings = await this.apiService.sendRequest(req);
+    return standings;
+  }
+
+  async getOverallStandings() {
+    let standings: any = [];
+    const req = `standings/overall`;
     standings = await this.apiService.sendRequest(req);
     return standings;
   }

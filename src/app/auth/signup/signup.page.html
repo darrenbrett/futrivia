@@ -1,0 +1,54 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title style="text-align: center;">Sign Up</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+    <ion-list>
+      <ion-item>
+        <ion-label position="floating">Email</ion-label>
+        <ion-input
+          type="email"
+          ngModel name="email"
+          required
+          email
+          #emailCtlr="ngModel"
+        ></ion-input>
+      </ion-item>
+      <ion-item *ngIf="!emailCtlr.valid && emailCtlr.touched" lines="none" class="no-line">
+        <p>Should be a valid email address.</p>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Password</ion-label>
+        <ion-input
+          type="password"
+          ngModel name="password"
+          required
+          password
+          minlength="6"
+          #passwordCtlr="ngModel"
+      ></ion-input>
+      </ion-item>
+      <ion-item *ngIf="!passwordCtlr.valid && passwordCtlr.touched" lines="none" class="no-line">
+        <p>Should be at least 6 characters in length.</p>
+      </ion-item>
+    </ion-list>
+    <ion-button
+      color="primary"
+      type="submit"
+      (click)="onSignUp()"
+      class="btn"
+      expand="block"
+      [disabled]="!f.valid"
+    >Sign up</ion-button>
+    <ion-button
+      color="primary"
+      type="submit"
+      fill="clear"
+      class="btn"
+      expand="block"
+    ><a href="#"[routerLink]="['/', 'auth']" style="text-decoration: none;">Click to log in</a></ion-button>
+  </form>
+</ion-content>

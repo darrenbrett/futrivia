@@ -1,6 +1,9 @@
-.conf-header {
-  margin-bottom: 10px;
-  color: #ccc;
+.standings-header {
+  margin-bottom: 4px;
+  color: #f1f1f1;
+  text-align: center;
+  background-color: #444;
+  padding: 4px 0;
 }
 
 ion-row {
@@ -14,7 +17,7 @@ ion-row {
 .logo-img {
   height: 40px;
   width: 34px;
-  padding: 4px 0 4px 0;
+  padding: 2px 0;
 }
 
 .col-labels {
@@ -22,9 +25,5 @@ ion-row {
 }
 
 .center-box {
-  align-items:center;
-}
-
-ion-menu-button {
-  color: #32b733
+  align-items: center;
 }

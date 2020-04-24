@@ -9,16 +9,32 @@ import { StandingsService } from './standings.service';
 export class StandingsPage implements OnInit {
   easternStandings = [];
   westernStandings = [];
+  overallStandings = [];
+
+  overall = false;
 
   constructor(private standingsService: StandingsService) { }
 
-  async getStandings() {
+  async getConferenceStandings() {
     this.easternStandings = await this.standingsService.getStandingsByConference('east');
     this.westernStandings = await this.standingsService.getStandingsByConference('west');
   }
 
+  async getOverallStandings() {
+    this.overallStandings = await this.standingsService.getOverallStandings();
+  }
+
+  showOverallStandings() {
+    this.overall = true;
+  }
+
+  showConferenceStandings() {
+    this.overall = false;
+  }
+
   ngOnInit() {
-    this.getStandings();
+    this.getConferenceStandings();
+    this.getOverallStandings();
   }
 
 }

@@ -13,8 +13,8 @@ export class AppComponent implements OnInit {
   public selectedIndex = 0;
   public appPages = [
     {
-      title: 'Main',
-      url: '/folder/Main',
+      title: 'Log out',
+      url: '/auth',
       icon: 'football'
     },
     {
@@ -23,8 +23,8 @@ export class AppComponent implements OnInit {
       icon: 'list'
     },
     {
-      title: 'Games',
-      url: '/folder/Games',
+      title: 'Scores',
+      url: '/scores',
       icon: 'at'
     },
     {
@@ -33,7 +33,7 @@ export class AppComponent implements OnInit {
       icon: 'shirt'
     },
     {
-      title: 'Scorers',
+      title: 'Goal scorers',
       url: '/scorers',
       icon: 'walk'
     }
