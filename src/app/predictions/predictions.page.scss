@@ -1,0 +1,52 @@
+.logo-img {
+  height: 100px;
+  padding: 10px 0;
+}
+
+.center-box {
+  align-items: center;
+}
+
+.bordered {
+  padding-bottom: 60px;
+  border-bottom: 1px solid #555;
+}
+
+.active {
+  font-weight: bold;
+  font-size: 20px;
+  text-align: center;
+  padding: 10px;
+  color: greenyellow;
+  border: 2px solid #ccc;
+  background-color: green;
+  margin: 0 20px;
+}
+
+.at-sign {
+  height: 60px;
+  margin: auto;
+  width: 100%;
+}
+
+.option {
+  font-size: 20px;
+  text-align: center;
+  padding: 10px;
+  color: #ccc;
+  border: 2px solid #444;
+  background-color: #333;
+  margin: 0 20px;
+}
+
+.centered {
+  position: relative;
+  width: 200px;
+  height: auto;
+  left: 0;
+  right: 0;
+  margin:0 auto;
+  margin-top: 10%;
+  margin-bottom: 10%;
+  transform:translateY(-10%);
+}

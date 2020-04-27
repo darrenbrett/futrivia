@@ -1,0 +1,131 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button class="green-menu"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Weekly Predictions</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- <ion-grid *ngFor="let g of games; let i = index">
+    <ion-row class="center-box">
+      <ion-col>
+        <ion-img [src]="g.awayLogo" class="logo-img"></ion-img>
+      </ion-col>
+      <ion-col><ion-icon name="at-outline" class="at-sign" style="color: #ccc;"></ion-icon></ion-col>
+      <ion-col>
+        <ion-img [src]="g.homeLogo" class="logo-img"></ion-img>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col (click)="makeSelection(g.away, 'away')" class="option">WIN</ion-col>
+      <ion-col (click)="makeSelection('', 'tie')" class="option">TIE</ion-col>
+      <ion-col (click)="makeSelection(g.home, 'home')" class="option">WIN</ion-col>
+    </ion-row>
+    <ion-item-divider style="border-bottom: 1px solid #555;"></ion-item-divider>
+  </ion-grid> -->
+
+  <ion-grid>
+    <ion-row class="center-box">
+      <ion-col>
+        <ion-img [src]="games[0]?.awayLogo" class="logo-img"></ion-img>
+      </ion-col>
+      <ion-col><ion-icon name="at-outline" class="at-sign" style="color: #ccc;"></ion-icon></ion-col>
+      <ion-col>
+        <ion-img [src]="games[0]?.homeLogo" class="logo-img"></ion-img>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col (click)="makeFirstSelection(games[0]?.away, 'away')" class="option" [ngClass]="{'active' : (firstSelected === 'away')}">WIN</ion-col>
+      <ion-col (click)="makeFirstSelection('', 'tie')" class="option" [ngClass]="{'active' : (firstSelected === 'tie')}">TIE</ion-col>
+      <ion-col (click)="makeFirstSelection(games[0]?.home, 'home')" class="option" [ngClass]="{'active' : (firstSelected === 'home')}">WIN</ion-col>
+    </ion-row>
+    <ion-item-divider style="border-bottom: 1px solid #555;"></ion-item-divider>
+
+    <ion-row class="center-box">
+      <ion-col>
+        <ion-img [src]="games[1]?.awayLogo" class="logo-img"></ion-img>
+      </ion-col>
+      <ion-col><ion-icon name="at-outline" class="at-sign" style="color: #ccc;"></ion-icon></ion-col>
+      <ion-col>
+        <ion-img [src]="games[1]?.homeLogo" class="logo-img"></ion-img>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col (click)="makeSecondSelection(games[1]?.away, 'away')" class="option" [ngClass]="{'active' : (secondSelected === 'away')}">WIN</ion-col>
+      <ion-col (click)="makeSecondSelection('', 'tie')" class="option" [ngClass]="{'active' : (secondSelected === 'tie')}">TIE</ion-col>
+      <ion-col (click)="makeSecondSelection(games[1]?.home, 'home')" class="option" [ngClass]="{'active' : (secondSelected === 'home')}">WIN</ion-col>
+    </ion-row>
+    <ion-item-divider style="border-bottom: 1px solid #555;"></ion-item-divider>
+
+    <ion-row class="center-box">
+      <ion-col>
+        <ion-img [src]="games[2]?.awayLogo" class="logo-img"></ion-img>
+      </ion-col>
+      <ion-col><ion-icon name="at-outline" class="at-sign" style="color: #ccc;"></ion-icon></ion-col>
+      <ion-col>
+        <ion-img [src]="games[2]?.homeLogo" class="logo-img"></ion-img>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col (click)="makeThirdSelection(games[2]?.away, 'away')" class="option" [ngClass]="{'active' : (thirdSelected === 'away')}">WIN</ion-col>
+      <ion-col (click)="makeThirdSelection('', 'tie')" class="option" [ngClass]="{'active' : (thirdSelected === 'tie')}">TIE</ion-col>
+      <ion-col (click)="makeThirdSelection(games[2]?.home, 'home')" class="option" [ngClass]="{'active' : (thirdSelected === 'home')}">WIN</ion-col>
+    </ion-row>
+    <ion-item-divider style="border-bottom: 1px solid #555;"></ion-item-divider>
+
+    <ion-row class="center-box">
+      <ion-col>
+        <ion-img [src]="games[3]?.awayLogo" class="logo-img"></ion-img>
+      </ion-col>
+      <ion-col><ion-icon name="at-outline" class="at-sign" style="color: #ccc;"></ion-icon></ion-col>
+      <ion-col>
+        <ion-img [src]="games[3]?.homeLogo" class="logo-img"></ion-img>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col (click)="makeFourthSelection(games[3]?.away, 'away')" class="option" [ngClass]="{'active' : (fourthSelected === 'away')}">WIN</ion-col>
+      <ion-col (click)="makeFourthSelection('', 'tie')" class="option" [ngClass]="{'active' : (fourthSelected === 'tie')}">TIE</ion-col>
+      <ion-col (click)="makeFourthSelection(games[3]?.home, 'home')" class="option" [ngClass]="{'active' : (fourthSelected === 'home')}">WIN</ion-col>
+    </ion-row>
+    <ion-item-divider style="border-bottom: 1px solid #555;"></ion-item-divider>
+
+    <ion-row class="center-box">
+      <ion-col>
+        <ion-img [src]="games[4]?.awayLogo" class="logo-img"></ion-img>
+      </ion-col>
+      <ion-col><ion-icon name="at-outline" class="at-sign" style="color: #ccc;"></ion-icon></ion-col>
+      <ion-col>
+        <ion-img [src]="games[4]?.homeLogo" class="logo-img"></ion-img>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col (click)="makeFifthSelection(games[4]?.away, 'away')" class="option" [ngClass]="{'active' : (fifthSelected === 'away')}">WIN</ion-col>
+      <ion-col (click)="makeFifthSelection('', 'tie')" class="option" [ngClass]="{'active' : (fifthSelected === 'tie')}">TIE</ion-col>
+      <ion-col (click)="makeFifthSelection(games[4]?.home, 'home')" class="option" [ngClass]="{'active' : (fifthSelected === 'home')}">WIN</ion-col>
+    </ion-row>
+    <ion-item-divider style="border-bottom: 1px solid #555;"></ion-item-divider>
+
+    <ion-row class="center-box">
+      <ion-col>
+        <ion-img [src]="games[5]?.awayLogo" class="logo-img"></ion-img>
+      </ion-col>
+      <ion-col><ion-icon name="at-outline" class="at-sign" style="color: #ccc;"></ion-icon></ion-col>
+      <ion-col>
+        <ion-img [src]="games[5]?.homeLogo" class="logo-img"></ion-img>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col (click)="makeSixthSelection(games[5]?.away, 'away')" class="option" [ngClass]="{'active' : (sixthSelected === 'away')}">WIN</ion-col>
+      <ion-col (click)="makeSixthSelection('', 'tie')" class="option" [ngClass]="{'active' : (sixthSelected === 'tie')}">TIE</ion-col>
+      <ion-col (click)="makeSixthSelection(games[5]?.home, 'home')" class="option" [ngClass]="{'active' : (sixthSelected === 'home')}">WIN</ion-col>
+    </ion-row>
+    <ion-item-divider style="border-bottom: 1px solid #555;"></ion-item-divider>
+  </ion-grid>
+
+  <div class="centered">
+    <ion-button (click)="saveSelections()" color="success" [class.button-disabled]="selections.length < 6">SAVE MY PREDICTIONS!</ion-button>
+  </div>
+
+</ion-content>

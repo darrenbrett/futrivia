@@ -26,8 +26,17 @@
 @import "~@ionic/angular/css/flex-utils.css";
 
 .green-menu {
-  color: var(--ion-color-success);
-  // color: #32b733
+  color: #32b733;
+}
+
+.hype-green {
+  background-color: #32b733;
+  color: #000;
+}
+
+.wide-btn {
+  background-color: #32b733;
+  color: #000;
 }
 
 .ion-invalid.ion-touched ion-label {

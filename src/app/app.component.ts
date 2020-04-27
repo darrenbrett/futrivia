@@ -36,6 +36,11 @@ export class AppComponent implements OnInit {
       title: 'Goal scorers',
       url: '/scorers',
       icon: 'walk'
+    },
+    {
+      title: 'Predictions',
+      url: '/predictions',
+      icon: 'medal'
     }
   ];
 
