@@ -35,14 +35,17 @@
         <p>Should be at least 6 characters in length.</p>
       </ion-item>
     </ion-list>
+    <ion-spinner *ngIf="isLoading" class="ion-text-center"></ion-spinner>
     <ion-button
+      *ngIf="!isLoading"
       color="primary"
       type="submit"
-      (click)="onLogin()"
+      (click)="onLogin(f)"
       class="btn"
       expand="block"
       [disabled]="!f.valid"
     >Log in</ion-button>
+    <p class="ion-text-center" *ngIf="failedLogin">Login failed. Please try again.</p>
     <ion-button
       color="primary"
       type="submit"

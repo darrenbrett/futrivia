@@ -13,4 +13,8 @@ export class ApiService {
     return this.http.get<[]>(`${APIConfig.url}/${req}`).toPromise();
   }
 
+  sendPostRequest(req: string, body): any {
+    return this.http.post(`${APIConfig.url}/${req}`, body).toPromise();
+  }
+
 }

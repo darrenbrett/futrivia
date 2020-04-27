@@ -12,9 +12,13 @@
   border-bottom: 1px solid #555;
 }
 
+.grey-line {
+  border-bottom: 1px solid #333;
+}
+
 .active {
   font-weight: bold;
-  font-size: 20px;
+  font-size: 18px;
   text-align: center;
   padding: 10px;
   color: greenyellow;
@@ -30,7 +34,7 @@
 }
 
 .option {
-  font-size: 20px;
+  font-size: 18px;
   text-align: center;
   padding: 10px;
   color: #ccc;

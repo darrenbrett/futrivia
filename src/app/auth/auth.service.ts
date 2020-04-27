@@ -7,19 +7,30 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
 
-  // private _userIsAuthenticated = false;
-  private _userIsAuthenticated = true;
+  private _userIsAuthenticated = false;
 
   get userIsAuthenticated() {
-    console.log('userIsAuthenticated: ', this._userIsAuthenticated);
     return this._userIsAuthenticated;
   }
 
   constructor(private apiService: ApiService, private router: Router) { }
 
-  login() {
-    this._userIsAuthenticated = true;
-    this.router.navigateByUrl('/standings');
+  async login(body) {
+    const req = `users/login`;
+    let result = {
+      message: ''
+    };
+    result = await this.apiService.sendPostRequest(req, body);
+    if (result && result.message !== 'Auth failed') {
+      this._userIsAuthenticated = true;
+      this.router.navigateByUrl('/standings');
+      const message = 'Login successful!';
+      return message;
+    } else if (result && result.message === 'Auth failed') {
+      this._userIsAuthenticated = false;
+      const message = 'Login failed';
+      return message;
+    }
   }
 
   logout() {

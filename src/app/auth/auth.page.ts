@@ -12,10 +12,24 @@ export class AuthPage implements OnInit {
   constructor(private authService: AuthService) { }
 
   isLogin = true;
+  isLoading = false;
+  failedLogin = false;
 
-  onLogin() {
-    console.log('onLogin clicked...');
-    this.authService.login();
+  async onLogin(form: NgForm) {
+    this.isLoading = true;
+    const username = form.value.email;
+    const password = form.value.password;
+    const body = {
+      username,
+      password
+    };
+    const response = await this.authService.login(body);
+    if (response === 'Login failed') {
+      this.failedLogin = true;
+      this.isLoading = false;
+    }
+    form.reset();
+    this.isLoading = false;
   }
 
   onSubmit(form: NgForm) {
@@ -26,12 +40,7 @@ export class AuthPage implements OnInit {
     const password = form.value.password;
     console.log(email, password);
 
-    if (this.isLogin) {
-      // send login request
-    } else {
-      // send signup request
-    }
-
+    // Send login request
   }
 
   onSwitchAuthMode() {
