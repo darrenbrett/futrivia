@@ -1,0 +1,24 @@
+.confirmation-card {
+  padding: 30px;
+}
+
+.confirmation-message {
+  color: #000;
+  font-weight: bold;
+  font-size: 20px;
+  text-align: center;
+}
+
+.close-btn {
+  text-align: center;
+  border-radius: 50%;
+  margin: 20px;
+  color: #000;
+  width: 100px;
+  height: 50px;
+  left: 0;
+  right: 0;
+  margin:0 auto;
+  margin-top: 10%;
+  transform:translateY(-10%);
+}

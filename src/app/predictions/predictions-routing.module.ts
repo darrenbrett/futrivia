@@ -7,6 +7,10 @@ const routes: Routes = [
   {
     path: '',
     component: PredictionsPage
+  },
+  {
+    path: 'confirmation',
+    loadChildren: () => import('./confirmation/confirmation.module').then( m => m.ConfirmationPageModule)
   }
 ];
 

@@ -16,17 +16,6 @@
   border-bottom: 1px solid #333;
 }
 
-.active {
-  font-weight: bold;
-  font-size: 18px;
-  text-align: center;
-  padding: 10px;
-  color: greenyellow;
-  border: 2px solid #ccc;
-  background-color: green;
-  margin: 0 20px;
-}
-
 .at-sign {
   height: 60px;
   margin: auto;
@@ -41,6 +30,26 @@
   border: 2px solid #444;
   background-color: #333;
   margin: 0 20px;
+}
+
+.active {
+  font-weight: bold;
+  font-size: 18px;
+  text-align: center;
+  padding: 10px;
+  color: greenyellow;
+  border: 2px solid greenyellow;
+  background-color: green;
+  margin: 0 20px;
+}
+
+.success-report {
+  padding: 10px;
+  font-weight: bold;
+  border-radius: 10%;
+  background-color: green;
+  border: 2px solid greenyellow;
+  color: #fff;
 }
 
 .centered {

@@ -125,7 +125,7 @@
   </ion-grid>
 
   <div class="centered">
-    <ion-button (click)="saveSelections()" color="success" [class.button-disabled]="selections.length < 6">SAVE MY PREDICTIONS!</ion-button>
+    <ion-button *ngIf="!selectionsSubmitted" (click)="saveSelections()" (click)="showModal()" color="success" [class.button-disabled]="!areSelectionsMade()">SAVE MY PREDICTIONS!</ion-button>
   </div>
 
 </ion-content>

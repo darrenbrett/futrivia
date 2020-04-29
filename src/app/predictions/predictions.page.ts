@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { PredictionsService } from './predictions.service';
+import { Router } from '@angular/router';
+import { ModalController } from '@ionic/angular';
+import { ConfirmationPage } from './confirmation/confirmation.page';
 
 @Component({
   selector: 'app-predictions',
@@ -8,7 +11,12 @@ import { PredictionsService } from './predictions.service';
 })
 export class PredictionsPage implements OnInit {
 
+  userId: '5ea6d3be4f667327c1317be4';
+  currentRound;
   games = [];
+  year = '';
+  round = '';
+
   selections = [];
   firstSelected = '';
   secondSelected = '';
@@ -17,12 +25,27 @@ export class PredictionsPage implements OnInit {
   fifthSelected = '';
   sixthSelected = '';
 
-  constructor(private predictionsService: PredictionsService) { }
+  selectionsComplete = false;
+  selectionsSubmitted = false;
+
+  constructor(
+    private predictionsService: PredictionsService,
+    private router: Router,
+    private modalCtlr: ModalController
+  ) { }
+
+  async showModal() {
+    const modal = await this.modalCtlr.create({
+      component: ConfirmationPage
+    });
+    await modal.present();
+  }
 
   async getCurrentRound() {
-    this.games = await this.predictionsService.getCurrentRound();
-    console.log('this.games[0].awayLogo: ', this.games[0].awayLogo);
-    console.log('this.games[0]: ', this.games[0]);
+    this.currentRound = await this.predictionsService.getCurrentRound();
+    this.games = this.currentRound.games;
+    this.year = this.currentRound.year;
+    this.round = this.currentRound.round;
   }
 
   makeFirstSelection(team, choice) {
@@ -109,8 +132,41 @@ export class PredictionsPage implements OnInit {
     console.log('choice: ', choice);
   }
 
-  saveSelections() {
-    console.log('selections: ', this.selections);
+  areSelectionsMade() {
+    if (this.firstSelected &&
+       this.secondSelected &&
+       this.thirdSelected &&
+       this.fourthSelected &&
+       this.fifthSelected &&
+       this.sixthSelected) {
+      this.selectionsComplete = true;
+    }
+    return this.selectionsComplete;
+  }
+
+  clearSelections() {
+    this.firstSelected = '';
+    this.secondSelected = '';
+    this.thirdSelected = '';
+    this.fourthSelected = '';
+    this.fifthSelected = '';
+    this.sixthSelected = '';
+  }
+
+  async saveSelections() {
+    const predictionObj = {
+      userId: '5ea6d3be4f667327c1317be4',
+      year: this.year,
+      round: this.round,
+      predictions: [
+        this.selections
+      ]
+    };
+    this.selectionsSubmitted = true;
+    this.clearSelections();
+    this.selectionsSubmitted = false;
+    await this.predictionsService.sendUserPredictions(predictionObj);
+    this.router.navigateByUrl('/standings');
   }
 
   ngOnInit() {

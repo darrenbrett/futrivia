@@ -4,13 +4,11 @@ import { NgForm } from '@angular/forms';
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.page.html',
-  styleUrls: ['./signup.page.scss'],
+  styleUrls: ['./signup.page.scss', './../auth.page.scss'],
 })
 export class SignupPage implements OnInit {
 
   constructor() { }
-
-  isSign
 
   onSignUp() {
     console.log('onSignUp clicked...');

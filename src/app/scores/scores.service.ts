@@ -12,6 +12,7 @@ export class ScoresService {
     let scores: any = [];
     const req = `games/latest`;
     scores = await this.apiService.sendRequest(req);
+    console.log('scores: ', scores);
     scores.reverse();
     return scores;
   }

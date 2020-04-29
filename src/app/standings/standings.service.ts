@@ -10,14 +10,14 @@ export class StandingsService {
 
   async getStandingsByConference(conference) {
     let standings: any = [];
-    const req = `standings/${conference}`;
+    const req = `teams/standings/${conference}`;
     standings = await this.apiService.sendRequest(req);
     return standings;
   }
 
   async getOverallStandings() {
     let standings: any = [];
-    const req = `standings/overall`;
+    const req = `teams/standings/overall`;
     standings = await this.apiService.sendRequest(req);
     return standings;
   }

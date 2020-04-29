@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { PredictionsPageRoutingModule } from './predictions-routing.module';
 
 import { PredictionsPage } from './predictions.page';
+import { ConfirmationPageModule } from './confirmation/confirmation.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    PredictionsPageRoutingModule
+    PredictionsPageRoutingModule,
+    ConfirmationPageModule
   ],
   declarations: [PredictionsPage]
 })
