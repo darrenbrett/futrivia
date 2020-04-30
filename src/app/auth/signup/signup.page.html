@@ -5,7 +5,7 @@
 </ion-header>
 
 <ion-content padding>
-  <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+  <form #f="ngForm">
     <ion-list>
       <ion-item>
         <ion-label position="floating">Email</ion-label>
@@ -34,11 +34,15 @@
       <ion-item *ngIf="!passwordCtlr.valid && passwordCtlr.touched" lines="none" class="no-line">
         <p>Should be at least 6 characters in length.</p>
       </ion-item>
+      <ion-item *ngIf="failedSignUp" lines="none" class="no-line">
+        <p>This email address already exists. Please try another email address or switch to login.</p>
+      </ion-item>
     </ion-list>
     <ion-button
+      *ngIf="!isLoading"
       color="primary"
       type="submit"
-      (click)="onSignUp()"
+      (click)="onSignUp(f)"
       class="btn"
       expand="block"
       [disabled]="!f.valid"

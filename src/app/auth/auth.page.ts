@@ -17,30 +17,19 @@ export class AuthPage implements OnInit {
 
   async onLogin(form: NgForm) {
     this.isLoading = true;
-    const username = form.value.email;
+    const email = form.value.email;
     const password = form.value.password;
-    const body = {
-      username,
+    const creds = {
+      email,
       password
     };
-    const response = await this.authService.login(body);
+    const response = await this.authService.login(creds);
     if (response === 'Login failed') {
       this.failedLogin = true;
       this.isLoading = false;
     }
     form.reset();
     this.isLoading = false;
-  }
-
-  onSubmit(form: NgForm) {
-    if (!form.valid) {
-      return;
-    }
-    const email = form.value.email;
-    const password = form.value.password;
-    console.log(email, password);
-
-    // Send login request
   }
 
   onSwitchAuthMode() {

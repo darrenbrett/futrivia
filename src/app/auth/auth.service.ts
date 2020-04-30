@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from '../api/api.service';
 import { Router } from '@angular/router';
+import { Result } from './auth.model';
 
 @Injectable({
   providedIn: 'root'
@@ -15,17 +16,27 @@ export class AuthService {
 
   constructor(private apiService: ApiService, private router: Router) { }
 
-  async login(body) {
+  async signUp(creds: {}) {
+    const req = `users/signup`;
+    let result: Result;
+    result = await this.apiService.sendPostRequest(req, creds);
+    if (result && result.message === 'This email address already exists') {
+      const message = 'This email address already exists.';
+      return message;
+    } else if (result && result.message === 'New user created successfully!') {
+      console.log('Successful signup!');
+      this._userIsAuthenticated = true;
+      this.router.navigateByUrl('/standings');
+    }
+  }
+
+  async login(creds: {}) {
     const req = `users/login`;
-    let result = {
-      message: ''
-    };
-    result = await this.apiService.sendPostRequest(req, body);
+    let result: Result;
+    result = await this.apiService.sendPostRequest(req, creds);
     if (result && result.message !== 'Auth failed') {
       this._userIsAuthenticated = true;
       this.router.navigateByUrl('/standings');
-      const message = 'Login successful!';
-      return message;
     } else if (result && result.message === 'Auth failed') {
       this._userIsAuthenticated = false;
       const message = 'Login failed';
