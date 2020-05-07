@@ -3,6 +3,7 @@ import { PredictionsService } from './predictions.service';
 import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { ConfirmationPage } from './confirmation/confirmation.page';
+import { AuthService } from '../auth/auth.service';
 
 @Component({
   selector: 'app-predictions',
@@ -10,8 +11,8 @@ import { ConfirmationPage } from './confirmation/confirmation.page';
   styleUrls: ['./predictions.page.scss'],
 })
 export class PredictionsPage implements OnInit {
-
-  userId: '5ea6d3be4f667327c1317be4';
+  user: any;
+  userId: string;
   currentRound;
   games = [];
   year = '';
@@ -27,12 +28,18 @@ export class PredictionsPage implements OnInit {
 
   selectionsComplete = false;
   selectionsSubmitted = false;
+  completed = false;
 
   constructor(
     private predictionsService: PredictionsService,
     private router: Router,
     private modalCtlr: ModalController
   ) { }
+
+  async hasUserSubmittedRoundPredictions() {
+    const isCompleted = await this.predictionsService.hasUserSubmittedRoundPredictions(this.user._id);
+    this.completed = isCompleted;
+  }
 
   async showModal() {
     const modal = await this.modalCtlr.create({
@@ -49,7 +56,6 @@ export class PredictionsPage implements OnInit {
   }
 
   makeFirstSelection(team, choice) {
-    console.log('makeSelection() clicked: ', team, choice);
     const selection = { team, choice };
     this.selections.push(selection);
     if (choice === 'away') {
@@ -59,11 +65,9 @@ export class PredictionsPage implements OnInit {
     } else if (choice === 'home') {
       this.firstSelected = 'home';
     }
-    console.log('choice: ', choice);
   }
 
   makeSecondSelection(team, choice) {
-    console.log('makeSelection() clicked: ', team, choice);
     const selection = { team, choice };
     this.selections.push(selection);
     if (choice === 'away') {
@@ -73,11 +77,9 @@ export class PredictionsPage implements OnInit {
     } else if (choice === 'home') {
       this.secondSelected = 'home';
     }
-    console.log('choice: ', choice);
   }
 
   makeThirdSelection(team, choice) {
-    console.log('makeSelection() clicked: ', team, choice);
     const selection = { team, choice };
     this.selections.push(selection);
     if (choice === 'away') {
@@ -87,11 +89,9 @@ export class PredictionsPage implements OnInit {
     } else if (choice === 'home') {
       this.thirdSelected = 'home';
     }
-    console.log('choice: ', choice);
   }
 
   makeFourthSelection(team, choice) {
-    console.log('makeSelection() clicked: ', team, choice);
     const selection = { team, choice };
     this.selections.push(selection);
     if (choice === 'away') {
@@ -101,11 +101,9 @@ export class PredictionsPage implements OnInit {
     } else if (choice === 'home') {
       this.fourthSelected = 'home';
     }
-    console.log('choice: ', choice);
   }
 
   makeFifthSelection(team, choice) {
-    console.log('makeSelection() clicked: ', team, choice);
     const selection = { team, choice };
     this.selections.push(selection);
     if (choice === 'away') {
@@ -115,11 +113,9 @@ export class PredictionsPage implements OnInit {
     } else if (choice === 'home') {
       this.fifthSelected = 'home';
     }
-    console.log('choice: ', choice);
   }
 
   makeSixthSelection(team, choice) {
-    console.log('makeSelection() clicked: ', team, choice);
     const selection = { team, choice };
     this.selections.push(selection);
     if (choice === 'away') {
@@ -129,7 +125,6 @@ export class PredictionsPage implements OnInit {
     } else if (choice === 'home') {
       this.sixthSelected = 'home';
     }
-    console.log('choice: ', choice);
   }
 
   areSelectionsMade() {
@@ -155,13 +150,15 @@ export class PredictionsPage implements OnInit {
 
   async saveSelections() {
     const predictionObj = {
-      userId: '5ea6d3be4f667327c1317be4',
+      userId: this.user._id,
       year: this.year,
       round: this.round,
+      completed: true,
       predictions: [
         this.selections
       ]
     };
+
     this.selectionsSubmitted = true;
     this.clearSelections();
     this.selectionsSubmitted = false;
@@ -170,7 +167,9 @@ export class PredictionsPage implements OnInit {
   }
 
   ngOnInit() {
+    this.user = JSON.parse(localStorage.getItem('currentUser'));
     this.getCurrentRound();
+    this.hasUserSubmittedRoundPredictions();
   }
 
 }

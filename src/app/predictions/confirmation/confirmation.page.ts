@@ -14,7 +14,6 @@ export class ConfirmationPage implements OnInit {
   }
 
   async closeModal() {
-    console.log('clicked to close!');
     await this.modalCtlr.dismiss();
   }
 

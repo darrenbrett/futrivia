@@ -38,6 +38,7 @@ const routes: Routes = [
   },
   {
     path: 'predictions',
+    data : { userId : 'some userId' },
     loadChildren: () => import('./predictions/predictions.module').then( m => m.PredictionsPageModule)
   }
 ];

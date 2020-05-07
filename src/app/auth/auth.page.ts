@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AuthService } from './auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-auth',
@@ -9,11 +10,12 @@ import { AuthService } from './auth.service';
 })
 export class AuthPage implements OnInit {
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private router: Router) { }
 
   isLogin = true;
   isLoading = false;
   failedLogin = false;
+  creds;
 
   async onLogin(form: NgForm) {
     this.isLoading = true;
@@ -37,6 +39,7 @@ export class AuthPage implements OnInit {
   }
 
   ngOnInit() {
+    this.creds = this.router.getCurrentNavigation().extras.state;
   }
 
 }

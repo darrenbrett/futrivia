@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { StandingsService } from './standings.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-standings',
@@ -13,7 +14,7 @@ export class StandingsPage implements OnInit {
 
   overall = false;
 
-  constructor(private standingsService: StandingsService) { }
+  constructor(private standingsService: StandingsService, private router: Router) { }
 
   async getConferenceStandings() {
     this.easternStandings = await this.standingsService.getStandingsByConference('east');

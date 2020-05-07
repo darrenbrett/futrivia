@@ -13,6 +13,7 @@
           type="email"
           ngModel name="email"
           required
+          [ngModel]="creds?.email"
           email
           #emailCtlr="ngModel"
         ></ion-input>
@@ -25,6 +26,7 @@
         <ion-input
           type="password"
           ngModel name="password"
+          [ngModel]="creds?.password"
           required
           password
           minlength="6"

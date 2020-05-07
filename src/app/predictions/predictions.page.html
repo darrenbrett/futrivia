@@ -7,25 +7,13 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <!-- <ion-grid *ngFor="let g of games; let i = index">
-    <ion-row class="center-box">
-      <ion-col>
-        <ion-img [src]="g.awayLogo" class="logo-img"></ion-img>
-      </ion-col>
-      <ion-col><ion-icon name="at-outline" class="at-sign" style="color: #ccc;"></ion-icon></ion-col>
-      <ion-col>
-        <ion-img [src]="g.homeLogo" class="logo-img"></ion-img>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col (click)="makeSelection(g.away, 'away')" class="option">WIN</ion-col>
-      <ion-col (click)="makeSelection('', 'tie')" class="option">TIE</ion-col>
-      <ion-col (click)="makeSelection(g.home, 'home')" class="option">WIN</ion-col>
-    </ion-row>
-    <ion-item-divider style="border-bottom: 1px solid #555;"></ion-item-divider>
-  </ion-grid> -->
+<ion-content *ngIf="completed">
+    <ion-item>
+      <h6>You're all set! Your predictions for the upcoming Round {{ round }} have been submitted.</h6>
+    </ion-item>
+</ion-content>
 
+<ion-content *ngIf="!completed">
   <ion-grid>
     <ion-row class="center-box">
       <ion-col>

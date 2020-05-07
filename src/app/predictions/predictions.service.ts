@@ -18,6 +18,21 @@ export class PredictionsService {
     return currentRound;
   }
 
+  async hasUserSubmittedRoundPredictions(userId) {
+    const roundReq = await this.getCurrentRound();
+    const round = roundReq.round;
+    console.log('userId: ', userId);
+    console.log('round: ', round);
+    let roundPredictions: any = {};
+    const req = `users/check-predictions`;
+    const body = {
+      userId,
+      round
+    };
+    roundPredictions = await this.apiService.sendPostRequest(req, body);
+    return roundPredictions;
+  }
+
   async sendUserPredictions(predictionObj) {
     const req = `users/predictions`;
     try {
