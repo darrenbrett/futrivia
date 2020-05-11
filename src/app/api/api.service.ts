@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { APIConfig } from 'src/environments/environment';
+import { APIConfig } from 'src/environments/environment.prod';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
@@ -18,6 +18,7 @@ export class ApiService {
   }
 
   sendPostRequest(req: string, body: object): any {
+    console.log('APIConfig.url: ', APIConfig.url);
     return this.http.post(`${APIConfig.url}/${req}`, body).toPromise();
   }
 
