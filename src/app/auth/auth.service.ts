@@ -40,6 +40,7 @@ export class AuthService {
   }
 
   async login(creds: {}) {
+    console.log('login firing...');
     const req = `users/login`;
     let result: Result;
     result = await this.apiService.sendPostRequest(req, creds);

@@ -11,7 +11,7 @@
 <ion-button size="6" offset="2" *ngIf="overall" (click)="showConferenceStandings()" color="success">CLICK FOR CONFERENCE STANDINGS</ion-button>
 
 <ion-content>
-  <ion-grid *ngIf="!overall">
+  <ion-grid *ngIf="!overall" class="ion-no-padding">
     <ion-header class="standings-header">WESTERN CONFERENCE</ion-header>
     <ion-row class="col-labels">
       <ion-col>TEAM</ion-col>
@@ -31,7 +31,7 @@
       <ion-col>{{ t.season.points }}</ion-col>
     </ion-row>
   </ion-grid>
-  <ion-grid *ngIf="!overall">
+  <ion-grid *ngIf="!overall" class="ion-no-padding">
     <ion-item-divider></ion-item-divider>
     <ion-header class="standings-header">EASTERN CONFERENCE</ion-header>
     <ion-row class="col-labels">
@@ -53,7 +53,7 @@
     </ion-row>
   </ion-grid>
 
-  <ion-grid *ngIf="overall">
+  <ion-grid *ngIf="overall" class="ion-no-padding">
     <ion-header class="standings-header">OVERALL STANDINGS</ion-header>
     <ion-row class="col-labels">
       <ion-col>TEAM</ion-col>
@@ -64,7 +64,7 @@
       <ion-col>PTS</ion-col>
     </ion-row>
     <ion-row *ngFor="let t of overallStandings; let i = index" class="center-box">
-      <ion-img [src]="t.lgLogoUrl" class="logo-img"></ion-img>
+      <ion-img [src]="t.lgLogoUrl" class="logo-img" ></ion-img>
       <ion-col style="margin-left: 8px;">{{ t.name.location | teamNameTrunc }}</ion-col>
       <ion-col style="margin-left: 6px;">{{ t.season.wins }}</ion-col>
       <ion-col>{{ t.season.losses }}</ion-col>

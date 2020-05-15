@@ -1,13 +1,17 @@
 .standings-header {
   margin-bottom: 4px;
-  color: #f1f1f1;
+  color: #555;
   text-align: center;
-  background-color: #444;
+  background-color: #f4f4f4;
   padding: 4px 0;
 }
 
 ion-row {
-  border-bottom: 1px solid #555;
+  border-bottom: 1px solid #f1f1f1;
+}
+
+ion-button {
+  margin-bottom: 6px;
 }
 
 .grey-text {
@@ -17,7 +21,8 @@ ion-row {
 .logo-img {
   height: 40px;
   width: 34px;
-  padding: 2px 0;
+  // padding: 2px 0;
+  padding: 2px;
 }
 
 .col-labels {
