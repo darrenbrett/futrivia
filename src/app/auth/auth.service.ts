@@ -20,6 +20,8 @@ export class AuthService {
     return this.user;
   }
 
+  timedOut = false;
+
   constructor(private apiService: ApiService, private router: Router) { }
 
   async signUp(creds) {
@@ -39,11 +41,25 @@ export class AuthService {
     }
   }
 
+  timeOutOnLogin = () => {
+    setTimeout(() => {
+      console.log('timeout 46!!!');
+      this.timedOut = true;
+    }, 5000);
+  }
+
   async login(creds: {}) {
+    this.timeOutOnLogin();
     console.log('login firing...');
     const req = `users/login`;
     let result: Result;
     result = await this.apiService.sendPostRequest(req, creds);
+    if (this.timedOut === true) {
+      console.log('timed out in function');
+      this._userIsAuthenticated = false;
+      const message = 'Login failed';
+      return message;
+    }
     if (result && result.message !== 'Auth failed') {
       this._userIsAuthenticated = true;
       // Store userDetails in localStorage

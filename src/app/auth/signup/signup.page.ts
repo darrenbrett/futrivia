@@ -16,7 +16,6 @@ export class SignupPage implements OnInit {
   failedSignUp = false;
 
   async onSignUp(form: NgForm) {
-    console.log('onSignUp clicked...');
     this.isLoading = true;
     const email = form.value.email;
     const password = form.value.password;

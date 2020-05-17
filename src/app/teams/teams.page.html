@@ -10,7 +10,7 @@
 <ion-content>
   <ion-grid>
     <ion-row *ngFor="let t of teams; let i = index" class="center-box">
-      <ion-img [src]="t.smLogoUrl" class="logo-img"></ion-img>
+      <ion-img [src]="t.smLogoUrl" class="logo-img" [routerLink]="['./', t.name.location]"></ion-img>
       <ion-col style="margin-left: 6px;" [routerLink]="['./', t.name.location]">{{ t.name.location }} {{ t.name.nick }}</ion-col>
     </ion-row>
   </ion-grid>
