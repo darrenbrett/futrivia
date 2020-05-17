@@ -41,16 +41,7 @@ export class AuthService {
     }
   }
 
-  timeOutOnLogin = () => {
-    setTimeout(() => {
-      console.log('timeout 46!!!');
-      this.timedOut = true;
-    }, 5000);
-  }
-
   async login(creds: {}) {
-    this.timeOutOnLogin();
-    console.log('login firing...');
     const req = `users/login`;
     let result: Result;
     result = await this.apiService.sendPostRequest(req, creds);
@@ -67,6 +58,8 @@ export class AuthService {
       this.router.navigateByUrl('standings', {
         state: { user: result.user }
       });
+      const message = 'Logged in successfully!';
+      return message;
     } else if (result && result.message === 'Auth failed') {
       this._userIsAuthenticated = false;
       const message = 'Login failed';
