@@ -50,6 +50,7 @@ export class PredictionsPage implements OnInit {
 
   async getCurrentRound() {
     this.currentRound = await this.predictionsService.getCurrentRound();
+    console.log(this.currentRound);
     this.games = this.currentRound.games;
     this.year = this.currentRound.year;
     this.round = this.currentRound.round;

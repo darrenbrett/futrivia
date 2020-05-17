@@ -23,7 +23,6 @@ export class StandingsPage implements OnInit {
 
   async getOverallStandings() {
     this.overallStandings = await this.standingsService.getOverallStandings();
-    console.log(this.overallStandings);
   }
 
   showOverallStandings() {
