@@ -12,5 +12,6 @@ export interface Scores {
     homeTeamScorers: string[
     ]
   };
+  winner: string;
 }
 
