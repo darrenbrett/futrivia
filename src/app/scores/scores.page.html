@@ -19,7 +19,7 @@
       <ion-col size="2">
         {{ s.awayTeamGoalTimes.length }}
       </ion-col>
-      <div *ngIf="s.awayTeam == s.winner">
+      <div *ngIf="s.awayTeam == s?.winner">
         <ion-icon name="caret-back-outline"></ion-icon>
       </div>
     </ion-row>
@@ -33,7 +33,7 @@
       <ion-col size="2">
         {{ s.homeTeamGoalTimes.length }}
       </ion-col>
-      <div *ngIf="s.homeTeam == s.winner">
+      <div *ngIf="s.homeTeam == s?.winner">
         <ion-icon name="caret-back-outline"></ion-icon>
       </div>
     </ion-row>
