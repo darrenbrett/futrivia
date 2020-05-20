@@ -1,5 +1,5 @@
 {
-  "appId": "io.ionic.starter",
+  "appId": "io.evpsl.live",
   "appName": "evpsl-live",
   "bundledWebRuntime": false,
   "npmClient": "npm",
