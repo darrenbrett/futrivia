@@ -21,7 +21,8 @@
       <ion-col>GD</ion-col>
       <ion-col>PTS</ion-col>
     </ion-row>
-    <ion-row *ngFor="let t of westernStandings; let i = index" class="center-box">
+    <ion-row *ngFor="let t of westernStandings; let i = index" class="center-box"
+    [ngClass]="{'playoff-position' : i <= 2}">
       <ion-img [src]="t.lgLogoUrl" class="logo-img"></ion-img>
       <ion-col style="margin-left: 8px;">{{ t.name.location | teamNameTrunc }}</ion-col>
       <ion-col style="margin-left: 6px;">{{ t.season.wins }}</ion-col>
@@ -42,7 +43,8 @@
       <ion-col>GD</ion-col>
       <ion-col>PTS</ion-col>
     </ion-row>
-    <ion-row *ngFor="let t of easternStandings; let i = index" class="center-box">
+    <ion-row *ngFor="let t of easternStandings; let i = index" class="center-box"
+    [ngClass]="{'playoff-position' : i <= 2}">
       <ion-img [src]="t.lgLogoUrl" class="logo-img"></ion-img>
       <ion-col style="margin-left: 8px;">{{ t.name.location | teamNameTrunc }}</ion-col>
       <ion-col style="margin-left: 6px;">{{ t.season.wins }}</ion-col>
