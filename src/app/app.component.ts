@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewChecked } from '@angular/core';
 
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
@@ -10,8 +10,9 @@ import { Router, RouterEvent } from '@angular/router';
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.scss']
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, AfterViewChecked {
   activePath = '';
+  currentPage = '';
   public selectedIndex = 0;
   public appPages = [
     {
@@ -71,4 +72,21 @@ export class AppComponent implements OnInit {
       this.selectedIndex = this.appPages.findIndex(page => page.title.toLowerCase() === path.toLowerCase());
     }
   }
+
+  ngAfterViewChecked(): void {
+    this.router.events.subscribe((event: RouterEvent) => {
+      this.activePath = event.url;
+    });
+  }
+
+  transformedPath() {
+    let pathString = '';
+    let truncatedPath = '';
+    if (this.activePath) {
+      pathString = this.activePath.toString();
+      truncatedPath = pathString.substr(1);
+    }
+    return truncatedPath;
+  }
+
 }
