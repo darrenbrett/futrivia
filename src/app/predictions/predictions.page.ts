@@ -51,10 +51,10 @@ export class PredictionsPage implements OnInit {
   async getCurrentRound() {
     console.log('getCurrentRound() firing...');
     this.currentRound = await this.predictionsService.getCurrentRound();
-    console.log('this.currentRound: ', this.currentRound[0]);
-    this.games = this.currentRound[0].games;
-    this.year = this.currentRound[0].year;
-    this.round = this.currentRound[0].round;
+    console.log('this.currentRound: ', this.currentRound);
+    this.games = this.currentRound.games;
+    this.year = this.currentRound.year;
+    this.round = this.currentRound.round;
   }
 
   makeFirstSelection(team, choice) {
