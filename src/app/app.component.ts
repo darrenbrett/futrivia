@@ -21,29 +21,19 @@ export class AppComponent implements OnInit, AfterViewChecked {
       icon: 'football'
     },
     {
-      title: 'Standings',
-      url: '/standings',
-      icon: 'list'
+      title: 'Main',
+      url: '/main',
+      icon: 'home'
     },
     {
-      title: 'Scores',
-      url: '/scores',
+      title: 'Trivia',
+      url: '/trivia',
       icon: 'at'
     },
     {
-      title: 'Teams',
-      url: '/teams',
-      icon: 'shirt'
-    },
-    {
-      title: 'Goal scorers',
-      url: '/scorers',
+      title: 'Players',
+      url: '/players',
       icon: 'walk'
-    },
-    {
-      title: 'Predictions',
-      url: '/predictions',
-      icon: 'medal'
     }
   ];
 

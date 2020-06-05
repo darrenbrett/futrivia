@@ -5,7 +5,7 @@ import { AuthGuard } from './auth/auth.guard';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'folder/EVPSL',
+    redirectTo: 'folder/Futrivia',
     pathMatch: 'full'
   },
   {
@@ -13,33 +13,26 @@ const routes: Routes = [
     loadChildren: () => import('./folder/folder.module').then( m => m.FolderPageModule)
   },
   {
-    path: 'standings',
-    loadChildren: () => import('./standings/standings.module').then( m => m.StandingsPageModule),
-    canLoad: [AuthGuard]
-  },
-  {
-    path: 'scorers',
-    loadChildren: () => import('./scorers/scorers.module').then( m => m.ScorersPageModule),
-    canLoad: [AuthGuard]
-  },
-  {
-    path: 'teams',
-    loadChildren: () => import('./teams/teams.module').then( m => m.TeamsPageModule),
-    canLoad: [AuthGuard]
-  },
-  {
-    path: 'scores',
-    loadChildren: () => import('./scores/scores.module').then( m => m.ScoresPageModule),
+    path: 'players',
+    loadChildren: () => import('./players/players.module').then( m => m.PlayersPageModule),
     canLoad: [AuthGuard]
   },
   {
     path: 'auth',
     loadChildren: () => import('./auth/auth.module').then( m => m.AuthPageModule)
   },
+  // {
+  //   path: 'main',
+  //   loadChildren: () => import('./main/main.module').then( m => m.MainPageModule)
+  // },
+  { path: 'main', redirectTo: 'main/0', pathMatch: 'full' },
   {
-    path: 'predictions',
-    data : { userId : 'some userId' },
-    loadChildren: () => import('./predictions/predictions.module').then( m => m.PredictionsPageModule)
+    path: 'main/:counter',
+    loadChildren: () => import('./main/main.module').then(m => m.MainPageModule)
+  },
+  {
+    path: 'trivia',
+    loadChildren: () => import('./trivia/trivia.module').then( m => m.TriviaPageModule)
   }
 ];
 

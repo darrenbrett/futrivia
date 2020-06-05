@@ -4,7 +4,13 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
+<ion-grid style="height: 100%" *ngIf="isLoading">
+  <ion-row justify-content-center align-items-center style="height: 100%">
+    <ion-spinner></ion-spinner>
+  </ion-row>
+</ion-grid>
+
+<ion-content *ngIf="!isLoading" padding>
   <form #f="ngForm">
     <ion-list>
       <ion-item>
@@ -37,7 +43,7 @@
         <p>Should be at least 6 characters in length.</p>
       </ion-item>
     </ion-list>
-    <ion-spinner *ngIf="isLoading" class="ion-text-center"></ion-spinner>
+    <!-- <ion-spinner *ngIf="isLoading" class="ion-text-center"></ion-spinner> -->
     <ion-button
       *ngIf="!isLoading"
       color="primary"

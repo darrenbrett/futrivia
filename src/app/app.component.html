@@ -3,8 +3,8 @@
     <ion-menu contentId="main-content" type="overlay">
       <ion-content>
         <ion-list id="inbox-list">
-          <ion-list-header>EVPSL LIVE</ion-list-header>
-          <ion-note>The Official EVPSL App</ion-note>
+          <ion-list-header>Futrivia</ion-list-header>
+          <ion-note>Football Trivia!</ion-note>
 
           <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">
             <ion-item (click)="selectedIndex = i" routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false" [class.selected]="p.title.toLowerCase() == transformedPath()">

@@ -1,0 +1,17 @@
+<ion-header>
+  <ion-toolbar>
+    <!-- <ion-title>Confirm</ion-title> -->
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card color="primary" class="confirmation-card">
+    <ion-text class="confirmation-message">
+     <p>Your Score: {{score}}/10</p>
+     <p>{{ genResultMessage() }}</p>
+    </ion-text>
+    <ion-buttons>
+      <ion-button expand="block" fill="solid" (click)="closeModal()" size="large" class="close-btn">CLOSE</ion-button>
+    </ion-buttons>
+  </ion-card>
+</ion-content>

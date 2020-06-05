@@ -55,7 +55,7 @@ export class AuthService {
       this._userIsAuthenticated = true;
       // Store userDetails in localStorage
       localStorage.setItem('currentUser', JSON.stringify(result.user));
-      this.router.navigateByUrl('standings', {
+      this.router.navigateByUrl('main', {
         state: { user: result.user }
       });
       const message = 'Logged in successfully!';

@@ -1,6 +1,6 @@
 {
-  "appId": "io.evpsl.live",
-  "appName": "evpsl-live",
+  "appId": "io.futrivia.live",
+  "appName": "futrivia",
   "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "www",

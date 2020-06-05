@@ -1,0 +1,61 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button class="green-menu"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Trivia</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form #triviaForm="ngForm">
+    <ion-list *ngFor="let q of triviaSet?.questions; let i = index">
+      <ion-radio-group value="biff">
+        <ion-list-header>
+          <ion-label class="question">{{ q?.question }}</ion-label>
+        </ion-list-header>
+
+        <ion-item>
+          <ion-label>{{ q?.choices[0]}}</ion-label>
+          <ion-radio
+            slot="start"
+            value={{q?.choices[0]}}
+            (click)="getSelection(i, q?.choices[0])">
+          </ion-radio>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>{{ q?.choices[1]}}</ion-label>
+          <ion-radio
+            slot="start"
+            value={{q?.choices[1]}}
+            (click)="getSelection(i, q?.choices[1])">
+          </ion-radio>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>{{ q?.choices[2]}}</ion-label>
+          <ion-radio
+            slot="start"
+            value={{q?.choices[2]}}
+            (click)="getSelection(i, q?.choices[2])">
+          </ion-radio>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>{{ q?.choices[3]}}</ion-label>
+          <ion-radio
+            slot="start"
+            value={{q?.choices[3]}}
+            (click)="getSelection(i, q?.choices[3])">
+          </ion-radio>
+        </ion-item>
+
+      </ion-radio-group>
+    </ion-list>
+    <ion-item-divider></ion-item-divider>
+    <ion-button expand="block" [disabled]="answers.length < 10 || answersSubmitted"
+    type="submit"
+    (click)="submitAnswers(triviaForm)">SUBMIT ANSWERS</ion-button>
+  </form>
+</ion-content>
