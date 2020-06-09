@@ -18,32 +18,26 @@
     <ion-row>
       <ion-col>Player Level: {{ userStats?.level }}</ion-col>
     </ion-row>
+    <ion-row *ngIf="userStats?.roundsCompleted > 0">
+      <ion-col>Latest Round Score: {{ userStats?.lastScore }}/10</ion-col>
+    </ion-row>
     <ion-row>
       <ion-col>Total Points: {{ userStats?.points }}</ion-col>
     </ion-row>
   </ion-grid>
 
-  <ion-row>
-    <ion-col class="second-header">FEATURES UNLOCKED</ion-col>
-  </ion-row>
-  <ion-grid *ngFor="let f of user1.featuresUnlocked; let i = index">
+  <ng-container *ngIf="userStats?.roundsCompleted >= 3">
     <ion-row>
-      <ion-col>{{ f.feature }}</ion-col>
+      <ion-col class="second-header">FEATURES UNLOCKED</ion-col>
     </ion-row>
-  </ion-grid>
+    <ion-grid *ngFor="let feature of userStats?.featuresUnlocked; let i = index">
+      <ion-row>
+        <ion-col>{{ feature }}</ion-col>
+      </ion-row>
+    </ion-grid>
+  </ng-container>
   <ion-item-divider></ion-item-divider>
-  <ng-container *ngIf="user1.roundsRemaining === 0">
-    <p>You have no available rounds remaining today.</p>
-    <p>Check back tomorrow!</p>
-  </ng-container>
-  <ng-container *ngIf="user1.roundsRemaining > 0 && user1.roundsRemaining < 2">
-    <p>You have {{ user1.roundsRemaining }} available round remaining today</p>
-    <ion-button (click)="loadNextRound()">PLAY NEXT ROUND</ion-button>
-  </ng-container>
-  <ng-container *ngIf="user1.roundsRemaining > 1">
-    <p>You have {{ user1.roundsRemaining }} available rounds remaining today</p>
-    <ion-button (click)="loadNextRound()">PLAY NEXT ROUND</ion-button>
-  </ng-container>
+  <app-next-round [userStats]="userStats"></app-next-round>
 </ion-content>
 
 

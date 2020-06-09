@@ -15,30 +15,23 @@ export class MainPage implements OnInit {
 
   constructor(private router: Router, private mainService: MainService) { }
 
-  user1 = {
-    name: 'David Smith',
-    puzzlesCompleted: 33,
-    weeklyPoints: 14,
-    monthlyPoints: 28,
-    yearlyPoints: 84,
-    position: 15,
-    featuresUnlocked: [
-      { feature: 'AfterBurner' },
-      { feature: 'Monthly Champion' }
-    ],
-    roundsRemaining: 2
-  };
-
-  ngOnInit() {
+  async ngOnInit() {
+    console.log('ngInit() running...');
     const userStr = localStorage.getItem('currentUser');
     if (userStr) {
       const user = JSON.parse(userStr);
       this.username = user.username;
     } else {
       this.user = this.router.getCurrentNavigation().extras.state;
+      console.log('this.user 38: ', this.user);
       this.username = this.user.user.username;
     }
-    this.getPlayerStats();
+    await this.getPlayerStats();
+  }
+
+  async ionViewWillEnter() {
+    console.log('ionViewWillEnter() firing...');
+    await this.getPlayerStats();
   }
 
   async loadNextRound() {
