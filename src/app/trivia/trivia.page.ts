@@ -1,17 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { ConfirmationPage } from './confirmation/confirmation.page';
 import { TriviaService } from './trivia.service';
 import { NgForm } from '@angular/forms';
+import { timer, Subscription } from 'rxjs';
+import { Router } from '@angular/router';
+import { FormatTimePipe } from './format-time.pipe';
 
 @Component({
   selector: 'app-trivia',
   templateUrl: './trivia.page.html',
   styleUrls: ['./trivia.page.scss'],
 })
-export class TriviaPage implements OnInit {
+export class TriviaPage implements OnInit, OnDestroy {
 
-  constructor(private modalCtlr: ModalController, private triviaService: TriviaService) {}
+  constructor(private modalCtlr: ModalController, private triviaService: TriviaService, private router: Router) {}
 
   answers = [];
   finalAnswers = [];
@@ -20,13 +23,33 @@ export class TriviaPage implements OnInit {
   username: string;
   triviaSet;
   pointsToAdd = 0;
+  topic;
+
+  countDown: Subscription;
+  counter = 90;
+  tick = 1000;
 
   async ngOnInit() {
     const userStr = localStorage.getItem('currentUser');
     this.user = JSON.parse(userStr);
     this.username = this.user.username;
-    this.triviaSet = await this.triviaService.getNextTriviaSet(this.username);
+    this.topic = this.router.getCurrentNavigation().extras.state || { topic: 'starter' };
+    this.triviaSet = await this.triviaService.getNextTriviaSet(this.username, this.topic.topic);
     console.log('this.triviaSet: ', this.triviaSet);
+
+    this.countDown = timer(0, this.tick).subscribe(() => --this.counter);
+  }
+
+  ngOnDestroy() {
+    this.countDown = null;
+  }
+
+  onTimeOut() {
+    if (this.counter < 1) {
+      this.answersSubmitted = true;
+      this.showModal();
+      this.updatePlayerStats();
+    }
   }
 
   getSelection(qNum, qSelection) {
@@ -53,12 +76,13 @@ export class TriviaPage implements OnInit {
     let score = 0;
     for (const u of this.answers) {
       for (const q of this.triviaSet.questions) {
-        if (u.qSelection === q.answer && u.qNum === q.qid) {
+        if (u.qSelection === q.answer && (u.qNum + 1) === q.qid) {
           score++;
         }
       }
     }
     this.pointsToAdd = score;
+    console.log('score: ', score);
     return score;
   }
 
@@ -73,6 +97,7 @@ export class TriviaPage implements OnInit {
   }
 
   submitAnswers(form: NgForm) {
+    console.log('submitAnsers() is firing...');
     this.answersSubmitted = true;
     form.reset();
     this.showModal();
@@ -80,8 +105,8 @@ export class TriviaPage implements OnInit {
   }
 
   updatePlayerStats() {
-    console.log('updatePlayerStats() is firing...');
     this.triviaService.updatePlayersStats(this.username, this.triviaSet.set, this.pointsToAdd);
   }
 
 }
+

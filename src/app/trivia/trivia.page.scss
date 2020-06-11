@@ -9,3 +9,15 @@ ion-item-divider {
 .question {
   padding: 0 15px;
 }
+
+.timer {
+  padding: 0 5px;
+  border-radius: 5px;
+  color: green;
+}
+
+.expired {
+  padding: 0 5px;
+  border-radius: 5px;
+  color: red;
+}

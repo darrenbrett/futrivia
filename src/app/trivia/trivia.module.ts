@@ -9,6 +9,7 @@ import { TriviaPageRoutingModule } from './trivia-routing.module';
 import { TriviaPage } from './trivia.page';
 
 import { ConfirmationPageModule } from './confirmation/confirmation.module';
+import { FormatTimePipe } from './format-time.pipe';
 
 @NgModule({
   imports: [
@@ -18,6 +19,6 @@ import { ConfirmationPageModule } from './confirmation/confirmation.module';
     TriviaPageRoutingModule,
     ConfirmationPageModule
   ],
-  declarations: [TriviaPage]
+  declarations: [TriviaPage, FormatTimePipe]
 })
 export class TriviaPageModule {}

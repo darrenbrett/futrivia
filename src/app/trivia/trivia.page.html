@@ -4,10 +4,16 @@
       <ion-menu-button class="green-menu"></ion-menu-button>
     </ion-buttons>
     <ion-title>Trivia</ion-title>
+    <ng-container *ngIf="counter > 0">
+      <p slot="end" class="timer">{{ counter | formatTime }}</p>
+    </ng-container>
+    <ng-container *ngIf="counter === 0">
+      <p slot="end" class="expired">TIME'S UP!</p>
+    </ng-container>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content *ngIf="counter > -1">
   <form #triviaForm="ngForm">
     <ion-list *ngFor="let q of triviaSet?.questions; let i = index">
       <ion-radio-group value="biff">
@@ -58,4 +64,13 @@
     type="submit"
     (click)="submitAnswers(triviaForm)">SUBMIT ANSWERS</ion-button>
   </form>
+</ion-content>
+
+<ion-content *ngIf="counter < 0" style="text-align: center">
+    <h3>Time has expired for this round.</h3>
+    <div>
+      <ion-button (click)="onTimeOut()">
+        GET SCORE
+      </ion-button>
+    </div>
 </ion-content>

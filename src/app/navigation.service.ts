@@ -11,7 +11,7 @@ export class NavigationService {
   constructor(private navCtlr: NavController) { }
 
   navigateHome() {
-    this.counter += 1;
-    this.navCtlr.navigateRoot(`/main/${this.counter}`);
+    const incCount = this.counter += 1;
+    this.navCtlr.navigateRoot(`/main/${incCount}`);
   }
 }

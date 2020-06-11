@@ -13,6 +13,12 @@ export class MainPage implements OnInit {
   username: string;
   userStats;
 
+  triviaTopics = [
+    'La Liga',
+    'Premier League',
+    'World Cup'
+  ];
+
   constructor(private router: Router, private mainService: MainService) { }
 
   async ngOnInit() {
@@ -34,13 +40,16 @@ export class MainPage implements OnInit {
     await this.getPlayerStats();
   }
 
-  async loadNextRound() {
-    this.router.navigateByUrl('trivia');
-  }
-
   async getPlayerStats() {
     this.userStats = await this.mainService.getPlayerStats(this.username);
     console.log('this.userStats: ', this.userStats);
+  }
+
+  playTopicalRound(topic) {
+    const joinedTopicStr  = topic.replace(/\s/g, '');
+    this.router.navigateByUrl('/trivia', {
+      state: { topic: joinedTopicStr }
+    });
   }
 
 }

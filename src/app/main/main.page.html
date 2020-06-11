@@ -27,17 +27,34 @@
   </ion-grid>
 
   <ng-container *ngIf="userStats?.roundsCompleted >= 3">
+    <ion-item-divider></ion-item-divider>
     <ion-row>
-      <ion-col class="second-header">FEATURES UNLOCKED</ion-col>
+      <ion-col class="second-header"><span class="new">NEW</span>FEATURES UNLOCKED!</ion-col>
     </ion-row>
     <ion-grid *ngFor="let feature of userStats?.featuresUnlocked; let i = index">
       <ion-row>
-        <ion-col>{{ feature }}</ion-col>
+        <ion-col class="features">{{ feature }}</ion-col>
       </ion-row>
     </ion-grid>
   </ng-container>
-  <ion-item-divider></ion-item-divider>
-  <app-next-round [userStats]="userStats"></app-next-round>
+
+  <ng-container *ngIf="userStats?.roundsCompleted >= 3">
+    <ion-grid *ngFor="let topic of triviaTopics; let i = index">
+      <ion-row>
+        <ion-col>
+          <ion-button (click)="playTopicalRound(topic.toLowerCase())">Play {{ topic }} Round</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <p>You have {{ userStats.roundsRemaining }} available rounds remaining today.</p>
+    <p>In order to qualify for another round<br> you must get at least 6/10 correct.</p>
+  </ng-container>
+
+  <ng-container *ngIf="userStats?.roundsCompleted < 3" >
+    <ion-item-divider></ion-item-divider>
+    <app-next-round [userStats]="userStats"></app-next-round>
+  </ng-container>
+
 </ion-content>
 
 
