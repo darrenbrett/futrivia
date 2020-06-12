@@ -13,6 +13,9 @@ export class MainPage implements OnInit {
   username: string;
   userStats;
 
+  bonusQualified = false;
+  bonusDeclined = false;
+
   triviaTopics = [
     'La Liga',
     'Premier League',
@@ -33,11 +36,19 @@ export class MainPage implements OnInit {
       this.username = this.user.user.username;
     }
     await this.getPlayerStats();
+    this.checkBonusQualification();
   }
 
   async ionViewWillEnter() {
     console.log('ionViewWillEnter() firing...');
     await this.getPlayerStats();
+  }
+
+  checkBonusQualification() {
+    this.bonusQualified = true;
+    // if (this.userStats.roundsCompleted === 5) {
+    //   this.bonusQualified = true;
+    // }
   }
 
   async getPlayerStats() {
@@ -50,6 +61,15 @@ export class MainPage implements OnInit {
     this.router.navigateByUrl('/trivia', {
       state: { topic: joinedTopicStr }
     });
+  }
+
+  launchBonusQuestion(userStats) {
+    console.log('launchBonusChallenge() firing...');
+  }
+
+  declineBonusQuestion() {
+    console.log('declineBonusQuestion() firing...');
+    this.bonusDeclined = true;
   }
 
 }

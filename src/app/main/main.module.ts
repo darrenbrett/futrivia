@@ -8,13 +8,15 @@ import { MainPageRoutingModule } from './main-routing.module';
 
 import { MainPage } from './main.page';
 import { NextRoundPage } from './next-round/next-round.page';
+import { SharedModule } from './../shared/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    MainPageRoutingModule
+    MainPageRoutingModule,
+    SharedModule.forRoot()
   ],
   declarations: [MainPage, NextRoundPage]
 })
