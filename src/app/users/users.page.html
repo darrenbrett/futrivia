@@ -11,13 +11,11 @@
   <ion-grid>
     <ion-row class="grey-text">
       <ion-col size-md="4" size-xs="6">PLAYER</ion-col>
-      <ion-col size-md size-xs="3">TEAM</ion-col>
-      <ion-col size-md size-xs="3">GOALS</ion-col>
+      <ion-col size-md size-xs="3">POINTS</ion-col>
     </ion-row>
-    <ion-row *ngFor="let s of scorers; let i = index">
-      <ion-col size-md="4" size-xs="6">{{ s.fullName }}</ion-col>
-      <ion-col size-md size-xs="3" class="grey-text">{{ s.currentTeam | teamNameTrunc }}</ion-col>
-      <ion-col size-md size-xs="3">{{ s.goals.year['2020'] }}</ion-col>
+    <ion-row *ngFor="let u of users; let i = index">
+      <ion-col size-md="4" size-xs="6">{{ u.displayName || u.username }}</ion-col>
+      <ion-col size-md size-xs="3">{{ u.points }}</ion-col>
     </ion-row>
   </ion-grid>
 </ion-content>

@@ -13,18 +13,14 @@ const routes: Routes = [
     loadChildren: () => import('./folder/folder.module').then( m => m.FolderPageModule)
   },
   {
-    path: 'players',
-    loadChildren: () => import('./players/players.module').then( m => m.PlayersPageModule),
+    path: 'users',
+    loadChildren: () => import('./users/users.module').then( m => m.UsersPageModule),
     canLoad: [AuthGuard]
   },
   {
     path: 'auth',
     loadChildren: () => import('./auth/auth.module').then( m => m.AuthPageModule)
   },
-  // {
-  //   path: 'main',
-  //   loadChildren: () => import('./main/main.module').then( m => m.MainPageModule)
-  // },
   { path: 'main', redirectTo: 'main/0', pathMatch: 'full' },
   {
     path: 'main/:counter',

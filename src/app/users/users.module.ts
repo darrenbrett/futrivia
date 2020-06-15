@@ -4,9 +4,9 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { PlayersPageRoutingModule } from './players-routing.module';
+import { UsersPageRoutingModule } from './users-routing.module';
 
-import { PlayersPage } from './players.page';
+import { UsersPage } from './users.page';
 import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
@@ -14,9 +14,9 @@ import { SharedModule } from '../shared/shared.module';
     CommonModule,
     FormsModule,
     IonicModule,
-    PlayersPageRoutingModule,
+    UsersPageRoutingModule,
     SharedModule.forRoot()
   ],
-  declarations: [PlayersPage]
+  declarations: [UsersPage]
 })
-export class PlayersPageModule {}
+export class UsersPageModule {}
