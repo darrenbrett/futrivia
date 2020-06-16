@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar>
+    <!-- <ion-title>Confirm</ion-title> -->
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ng-container *ngIf="result === 'correct'">
+    <ion-card color="primary" class="correct-card">
+      <ion-text class="message">
+          <p>Yes, that is correct!<br>
+          You scored a bonus 10 points!</p>
+      </ion-text>
+      <ion-buttons>
+        <ion-button expand="block" fill="solid" (click)="closeModal()" size="large" class="close-btn">CLOSE</ion-button>
+      </ion-buttons>
+    </ion-card>
+  </ng-container>
+  <ng-container *ngIf="result === 'incorrect'">
+    <ion-card color="primary" class="incorrect-card">
+      <ion-text class="message">
+          <p>Sorry, that is incorrect.<br>
+          You lost 5 points.</p>
+      </ion-text>
+      <ion-buttons>
+        <ion-button expand="block" fill="solid" (click)="closeModal()" size="large" class="close-btn">CLOSE</ion-button>
+      </ion-buttons>
+    </ion-card>
+  </ng-container>
+</ion-content>

@@ -1,0 +1,76 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button class="green-menu"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Bonus Question</ion-title>
+    <ng-container *ngIf="counter > 0">
+      <p slot="end" class="timer">{{ counter | formatTime }}</p>
+    </ng-container>
+    <ng-container *ngIf="counter === 0">
+      <p slot="end" class="expired">TIME'S UP!</p>
+    </ng-container>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="counter > -1">
+  <form #triviaForm="ngForm">
+    <ion-list>
+      <ion-radio-group value="biff">
+        <ion-list-header>
+          <ion-label class="question">{{ bonusQuestion?.question }}</ion-label>
+        </ion-list-header>
+
+        <ion-item>
+          <ion-label>{{ bonusQuestion?.choices[0]}}</ion-label>
+          <ion-radio
+            slot="start"
+            value={{bonusQuestion?.choices[0]}}
+            (click)="getSelection(bonusQuestion?.choices[0])">
+          </ion-radio>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>{{ bonusQuestion?.choices[1]}}</ion-label>
+          <ion-radio
+            slot="start"
+            value={{bonusQuestion?.choices[1]}}
+            (click)="getSelection(bonusQuestion?.choices[1])">
+          </ion-radio>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>{{ bonusQuestion?.choices[2]}}</ion-label>
+          <ion-radio
+            slot="start"
+            value={{bonusQuestion?.choices[2]}}
+            (click)="getSelection(bonusQuestion?.choices[2])">
+          </ion-radio>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>{{ bonusQuestion?.choices[3]}}</ion-label>
+          <ion-radio
+            slot="start"
+            value={{bonusQuestion?.choices[3]}}
+            (click)="getSelection(bonusQuestion?.choices[3])">
+          </ion-radio>
+        </ion-item>
+
+      </ion-radio-group>
+    </ion-list>
+    <ion-item-divider></ion-item-divider>
+    <ion-button expand="block" [disabled]="!finalAnswer || answersSubmitted"
+    type="submit"
+    (click)="submitAnswers(triviaForm)">SUBMIT ANSWER</ion-button>
+  </form>
+</ion-content>
+
+<ion-content *ngIf="counter < 0" style="text-align: center">
+    <h3>Time has expired for this round.</h3>
+    <div>
+      <ion-button (click)="onTimeOut()">
+        GET SCORE
+      </ion-button>
+    </div>
+</ion-content>
