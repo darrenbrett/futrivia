@@ -13,7 +13,10 @@ export class UsersPage implements OnInit {
   users: [];
 
   async getUsers() {
-    this.users = await this.usersService.getUsers();
+    const userStr = localStorage.getItem('currentUser');
+    const user = JSON.parse(userStr);
+    console.log('user.username: ', user.username);
+    this.users = await this.usersService.getUsers(user.username);
   }
 
   ngOnInit() {

@@ -1,8 +1,5 @@
-<ion-header [translucent]="true">
+<ion-header [translucent]="true" *ngIf="triviaSet?.questions">
   <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-menu-button class="green-menu"></ion-menu-button>
-    </ion-buttons>
     <ion-title>Trivia</ion-title>
     <ng-container *ngIf="counter > 0">
       <p slot="end" class="timer">{{ counter | formatTime }}</p>
@@ -13,64 +10,75 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content *ngIf="counter > -1">
-  <form #triviaForm="ngForm">
-    <ion-list *ngFor="let q of triviaSet?.questions; let i = index">
-      <ion-radio-group value="biff">
-        <ion-list-header>
-          <ion-label class="question">{{ q?.question }}</ion-label>
-        </ion-list-header>
+<ng-container *ngIf="!triviaSet?.questions">
+  <ion-content >
+    <ion-card>
+      <h4 style="padding: 10px;">There are currently no more rounds to play for this category.</h4>
+      <ion-button expand="block" (click)="returnToMain()">RETURN TO MAIN</ion-button>
+    </ion-card>
+  </ion-content>
+</ng-container>
 
-        <ion-item>
-          <ion-label>{{ q?.choices[0]}}</ion-label>
-          <ion-radio
-            slot="start"
-            value={{q?.choices[0]}}
-            (click)="getSelection(i, q?.choices[0])">
-          </ion-radio>
-        </ion-item>
-
-        <ion-item>
-          <ion-label>{{ q?.choices[1]}}</ion-label>
-          <ion-radio
-            slot="start"
-            value={{q?.choices[1]}}
-            (click)="getSelection(i, q?.choices[1])">
-          </ion-radio>
-        </ion-item>
-
-        <ion-item>
-          <ion-label>{{ q?.choices[2]}}</ion-label>
-          <ion-radio
-            slot="start"
-            value={{q?.choices[2]}}
-            (click)="getSelection(i, q?.choices[2])">
-          </ion-radio>
-        </ion-item>
-
-        <ion-item>
-          <ion-label>{{ q?.choices[3]}}</ion-label>
-          <ion-radio
-            slot="start"
-            value={{q?.choices[3]}}
-            (click)="getSelection(i, q?.choices[3])">
-          </ion-radio>
-        </ion-item>
-
-      </ion-radio-group>
-    </ion-list>
-    <ion-item-divider></ion-item-divider>
-    <ion-button expand="block" [disabled]="answers.length < 10 || answersSubmitted"
-    type="submit"
-    (click)="submitAnswers(triviaForm)">SUBMIT ANSWERS</ion-button>
-  </form>
-</ion-content>
-
-<ion-content *ngIf="counter < 0" style="text-align: center">
-    <h3>Time has expired for this round.</h3>
-    <div>
-      <ion-button (click)="onTimeOut()">
-        GET SCORE
-      </ion-button>
-    </div>
-</ion-content>
+<ng-container *ngIf="triviaSet?.questions">
+  <ion-content *ngIf="counter > -1">
+    <form #triviaForm="ngForm">
+      <ion-list *ngFor="let q of triviaSet?.questions; let i = index">
+        <ion-radio-group value="biff">
+          <ion-list-header>
+            <ion-label class="question">{{ q?.question }}</ion-label>
+          </ion-list-header>
+  
+          <ion-item>
+            <ion-label>{{ q?.choices[0]}}</ion-label>
+            <ion-radio
+              slot="start"
+              value={{q?.choices[0]}}
+              (click)="getSelection(i, q?.choices[0])">
+            </ion-radio>
+          </ion-item>
+  
+          <ion-item>
+            <ion-label>{{ q?.choices[1]}}</ion-label>
+            <ion-radio
+              slot="start"
+              value={{q?.choices[1]}}
+              (click)="getSelection(i, q?.choices[1])">
+            </ion-radio>
+          </ion-item>
+  
+          <ion-item>
+            <ion-label>{{ q?.choices[2]}}</ion-label>
+            <ion-radio
+              slot="start"
+              value={{q?.choices[2]}}
+              (click)="getSelection(i, q?.choices[2])">
+            </ion-radio>
+          </ion-item>
+  
+          <ion-item>
+            <ion-label>{{ q?.choices[3]}}</ion-label>
+            <ion-radio
+              slot="start"
+              value={{q?.choices[3]}}
+              (click)="getSelection(i, q?.choices[3])">
+            </ion-radio>
+          </ion-item>
+  
+        </ion-radio-group>
+      </ion-list>
+      <ion-item-divider></ion-item-divider>
+      <ion-button expand="block" [disabled]="answers.length < 10 || answersSubmitted"
+      type="submit"
+      (click)="submitAnswers(triviaForm)">SUBMIT ANSWERS</ion-button>
+    </form>
+  </ion-content>
+  
+  <ion-content *ngIf="counter < 0" style="text-align: center">
+      <h3>Time has expired for this round.</h3>
+      <div>
+        <ion-button (click)="onTimeOut()">
+          GET SCORE
+        </ion-button>
+      </div>
+  </ion-content>  
+</ng-container>

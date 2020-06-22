@@ -16,45 +16,40 @@ export class MainPage implements OnInit {
   bonusQualified = false;
   bonusDeclined = false;
 
-  triviaTopics = [
-    'La Liga',
-    'Premier League',
-    'World Cup'
-  ];
-
   constructor(private router: Router, private mainService: MainService) { }
 
   async ngOnInit() {
-    console.log('ngInit() running...');
     const userStr = localStorage.getItem('currentUser');
     if (userStr) {
       const user = JSON.parse(userStr);
       this.username = user.username;
     } else {
       this.user = this.router.getCurrentNavigation().extras.state;
-      console.log('this.user 38: ', this.user);
       this.username = this.user.user.username;
     }
     await this.getPlayerStats();
-    this.checkBonusQualification();
   }
 
   async ionViewWillEnter() {
-    console.log('ionViewWillEnter() firing...');
     await this.getPlayerStats();
-  }
-
-  checkBonusQualification() {
-    this.bonusQualified = true;
-    // if (this.userStats.roundsCompleted === 5) {
-    //   this.bonusQualified = true;
-    // }
   }
 
   async getPlayerStats() {
     this.userStats = await this.mainService.getPlayerStats(this.username);
     console.log('this.userStats: ', this.userStats);
   }
+
+  // async getTopicSpecs() {
+  //   const topicSpecs = await this.mainService.getTopicSpecs();
+  //   console.log('topicSpecs: ', topicSpecs);
+  //   return topicSpecs;
+  // }
+
+  // async getSetsPerTopic(topic: string) {
+  //   const result = await this.mainService.getSetsPerTopic(topic);
+  //   const totalTopicSets = result.sets;
+  //   return totalTopicSets;
+  // }
 
   playTopicalRound(topic) {
     const joinedTopicStr  = topic.replace(/\s/g, '');
@@ -63,12 +58,14 @@ export class MainPage implements OnInit {
     });
   }
 
-  launchBonusQuestion(userStats) {
-    console.log('launchBonusChallenge() firing...');
+  async launchBonusQuestion() {
+    this.router.navigateByUrl('/bonus-question', {
+      state: { user: this.userStats }
+    });
+    this.bonusDeclined = true;
   }
 
   declineBonusQuestion() {
-    console.log('declineBonusQuestion() firing...');
     this.bonusDeclined = true;
   }
 

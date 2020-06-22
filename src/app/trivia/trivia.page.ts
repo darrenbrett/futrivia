@@ -5,7 +5,7 @@ import { TriviaService } from './trivia.service';
 import { NgForm } from '@angular/forms';
 import { timer, Subscription } from 'rxjs';
 import { Router } from '@angular/router';
-import { FormatTimePipe } from './format-time.pipe';
+import { NavigationService } from '../navigation.service';
 
 @Component({
   selector: 'app-trivia',
@@ -14,7 +14,11 @@ import { FormatTimePipe } from './format-time.pipe';
 })
 export class TriviaPage implements OnInit, OnDestroy {
 
-  constructor(private modalCtlr: ModalController, private triviaService: TriviaService, private router: Router) {}
+  constructor(
+    private modalCtlr: ModalController,
+    private triviaService: TriviaService,
+    private router: Router,
+    private navService: NavigationService) {}
 
   answers = [];
   finalAnswers = [];
@@ -24,6 +28,7 @@ export class TriviaPage implements OnInit, OnDestroy {
   triviaSet;
   pointsToAdd = 0;
   topic;
+  lastCompletedTopic: string;
 
   countDown: Subscription;
   counter = 90;
@@ -34,6 +39,8 @@ export class TriviaPage implements OnInit, OnDestroy {
     this.user = JSON.parse(userStr);
     this.username = this.user.username;
     this.topic = this.router.getCurrentNavigation().extras.state || { topic: 'starter' };
+    this.lastCompletedTopic = this.topic.topic;
+    console.log('this.topic.topic 43: ', this.topic.topic);
     this.triviaSet = await this.triviaService.getNextTriviaSet(this.username, this.topic.topic);
     console.log('this.triviaSet: ', this.triviaSet);
 
@@ -105,7 +112,12 @@ export class TriviaPage implements OnInit, OnDestroy {
   }
 
   updatePlayerStats() {
-    this.triviaService.updatePlayersStats(this.username, this.triviaSet.set, this.pointsToAdd);
+    console.log('this.topic: ', this.topic);
+    this.triviaService.updatePlayersStats(this.username, this.triviaSet.set, this.lastCompletedTopic, this.pointsToAdd);
+  }
+
+  returnToMain() {
+    this.navService.navigateHome();
   }
 
 }

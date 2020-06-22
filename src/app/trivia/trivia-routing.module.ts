@@ -7,6 +7,10 @@ const routes: Routes = [
   {
     path: '',
     component: TriviaPage
+  },
+  {
+    path: 'bonus-question',
+    loadChildren: () => import('./bonus-question/bonus-question.module').then( m => m.BonusQuestionPageModule)
   }
 ];
 

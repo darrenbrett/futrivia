@@ -1,11 +1,15 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TeamNameTruncPipe } from './team-name-trunc.pipe';
+import { FormatTimePipe } from './format-time.pipe';
+import { FormatTopicPipe } from './format-topic.pipe';
 
 @NgModule({
-  declarations: [TeamNameTruncPipe],
+  declarations: [TeamNameTruncPipe, FormatTimePipe, FormatTopicPipe],
   exports: [
-    TeamNameTruncPipe
+    TeamNameTruncPipe,
+    FormatTimePipe,
+    FormatTopicPipe
   ],
   imports: [
     CommonModule

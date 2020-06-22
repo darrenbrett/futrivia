@@ -10,8 +10,8 @@ export class UsersService {
 
   constructor(private apiService: ApiService) { }
 
-  async getUsers() {
-    const req = `users/standings`;
+  async getUsers(username) {
+    const req = `users/standings/${username}`;
     this.users = await this.apiService.sendRequest(req);
     return this.users;
   }

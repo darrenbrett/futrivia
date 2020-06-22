@@ -9,16 +9,17 @@ import { TriviaPageRoutingModule } from './trivia-routing.module';
 import { TriviaPage } from './trivia.page';
 
 import { ConfirmationPageModule } from './confirmation/confirmation.module';
-import { FormatTimePipe } from './format-time.pipe';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   imports: [
+    SharedModule,
     CommonModule,
     FormsModule,
     IonicModule,
     TriviaPageRoutingModule,
     ConfirmationPageModule
   ],
-  declarations: [TriviaPage, FormatTimePipe]
+  declarations: [TriviaPage]
 })
 export class TriviaPageModule {}

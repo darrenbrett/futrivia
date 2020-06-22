@@ -20,13 +20,25 @@ export class TriviaService {
     return this.triviaSet;
   }
 
-  async updatePlayersStats(username: string, lastCompletedSet, pointsToAdd) {
+  async updatePlayersStats(username: string, lastCompletedSet, lastCompletedTopic: string, pointsToAdd) {
     const req = `users/update-user-stats`;
     let result: object;
     const body = {
       username,
       lastCompletedSet,
+      lastCompletedTopic,
       pointsToAdd
+    };
+    console.log('body sending: ', body);
+    result = await this.apiService.sendPostRequest(req, body);
+  }
+
+  async updateBonusQuestionStatus(username: string, qResult) {
+    const req = `users/update-user-bonus`;
+    let result: object;
+    const body = {
+      username,
+      qResult
     };
     console.log('body sending: ', body);
     result = await this.apiService.sendPostRequest(req, body);

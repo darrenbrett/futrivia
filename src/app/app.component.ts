@@ -26,13 +26,8 @@ export class AppComponent implements OnInit, AfterViewChecked {
       icon: 'home'
     },
     {
-      title: 'Trivia',
-      url: '/trivia',
-      icon: 'at'
-    },
-    {
       title: 'Players',
-      url: '/players',
+      url: '/users',
       icon: 'walk'
     }
   ];
