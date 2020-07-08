@@ -1,0 +1,29 @@
+<ion-card>
+  <ng-container *ngIf="user?.level === '2' && user?.level2RoundsCompleted < 1">
+    <ion-row [@flip]="flip">
+      <ion-col class="second-header"><span class="new">NEW!</span>
+      <span 
+        [ngClass]="getClass()">
+        LEVEL {{ user?.level.toUpperCase() }} UNLOCKED
+      </span></ion-col>
+    </ion-row>
+    <h6 style="font-style: bold">Congratulations!</h6>
+    <p>You successfully completed all rookie level topics!</p>
+    <p>Level 2 questions cover a range of topics.</p>
+    <p>Ready for your first Level 2 round?</p>
+  </ng-container>
+  <ng-container *ngIf="user?.level === '2' && user?.level2RoundsCompleted > 0">
+    <ion-row>
+      <ion-col class="second-header" [ngClass]="getClass()">
+        LEVEL {{ user?.level.toUpperCase() }}
+      </ion-col>
+    </ion-row>
+    <p>Level 2 questions cover a range of topics.</p>
+    <p>Ready for your next Level 2 round?</p>
+  </ng-container>
+  <ion-row>
+    <ion-col>
+      <ion-button (click)="loadNextRound()">PLAY NEXT ROUND</ion-button>
+    </ion-col>
+  </ion-row>
+</ion-card>

@@ -1,9 +1,9 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { timer, Subscription } from 'rxjs';
 import { MainService } from 'src/app/main/main.service';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
-import { ModalController } from '@ionic/angular';
+import { ModalController, AnimationController } from '@ionic/angular';
 import { TriviaService } from '../trivia.service';
 import { BonusResultPage } from './bonus-result/bonus-result.page';
 
@@ -13,7 +13,6 @@ import { BonusResultPage } from './bonus-result/bonus-result.page';
   styleUrls: ['./bonus-question.page.scss'],
 })
 export class BonusQuestionPage implements OnInit, OnDestroy {
-
   user;
   result = 'incorrect';
   bonusQuestion;
@@ -24,6 +23,7 @@ export class BonusQuestionPage implements OnInit, OnDestroy {
   constructor(
     private router: Router,
     private modalCtlr: ModalController,
+    private animationCtrl: AnimationController,
     private triviaService: TriviaService,
     private mainService: MainService) { }
 
@@ -32,7 +32,6 @@ export class BonusQuestionPage implements OnInit, OnDestroy {
   tick = 1000;
 
   async ngOnInit() {
-    console.log('ngOnInit()...');
     this.user = this.router.getCurrentNavigation().extras.state;
     console.log('this.user: ', this.user);
     this.bonusQuestion = await this.mainService.getBonusQuestion(this.user.user.username);

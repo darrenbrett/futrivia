@@ -16,6 +16,8 @@ export class MainPage implements OnInit {
   bonusQualified = false;
   bonusDeclined = false;
 
+  rookieStatusComplete = false;
+
   constructor(private router: Router, private mainService: MainService) { }
 
   async ngOnInit() {
@@ -35,21 +37,22 @@ export class MainPage implements OnInit {
   }
 
   async getPlayerStats() {
-    this.userStats = await this.mainService.getPlayerStats(this.username);
-    console.log('this.userStats: ', this.userStats);
+    this.user = await this.mainService.getPlayerStats(this.username);
+    console.log('this.user: ', this.user);
+    this.checkRookieTopicCompletionStatus();
   }
 
-  // async getTopicSpecs() {
-  //   const topicSpecs = await this.mainService.getTopicSpecs();
-  //   console.log('topicSpecs: ', topicSpecs);
-  //   return topicSpecs;
-  // }
-
-  // async getSetsPerTopic(topic: string) {
-  //   const result = await this.mainService.getSetsPerTopic(topic);
-  //   const totalTopicSets = result.sets;
-  //   return totalTopicSets;
-  // }
+  async checkRookieTopicCompletionStatus() {
+    for (const topic of this.user.topics) {
+      if (topic.topic !== 'starter' && topic.setsRemaining > 0) {
+        console.log('topic with sets remaining: ', topic);
+        return this.rookieStatusComplete = false;
+      } else if (topic.setsRemaining === 0) {
+        this.rookieStatusComplete = true;
+        console.log('this.rookieStatusComplete: ', this.rookieStatusComplete);
+      }
+    }
+  }
 
   playTopicalRound(topic) {
     const joinedTopicStr  = topic.replace(/\s/g, '');
@@ -60,7 +63,7 @@ export class MainPage implements OnInit {
 
   async launchBonusQuestion() {
     this.router.navigateByUrl('/bonus-question', {
-      state: { user: this.userStats }
+      state: { user: this.user }
     });
     this.bonusDeclined = true;
   }

@@ -11,7 +11,7 @@
 </ion-grid>
 
 <ion-content *ngIf="!isLoading" padding>
-  <form #f="ngForm">
+  <form #f="ngForm" (keydown)="onReturnKeydown($event, f)">
     <ion-list>
       <ion-item>
         <ion-label position="floating">Email</ion-label>

@@ -35,6 +35,12 @@ export class AuthPage implements OnInit {
     this.isLoading = false;
   }
 
+  onReturnKeydown(event: any, form: NgForm) {
+    if (event.key === 'Enter') {
+      this.onLogin(form);
+    }
+  }
+
   onSwitchAuthMode() {
     this.isLogin = !this.isLogin;
   }

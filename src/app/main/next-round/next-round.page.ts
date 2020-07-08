@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -6,14 +6,11 @@ import { Router } from '@angular/router';
   templateUrl: './next-round.page.html',
   styleUrls: ['./next-round.page.scss'],
 })
-export class NextRoundPage implements OnInit {
+export class NextRoundPage {
 
-  @Input() userStats;
+  @Input() user;
 
   constructor(private router: Router) { }
-
-  ngOnInit() {
-  }
 
   async loadNextRound() {
     this.router.navigateByUrl('trivia');

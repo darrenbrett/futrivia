@@ -1,19 +1,19 @@
-<ng-container *ngIf="userStats?.roundsCompleted > 0 && userStats?.lastScore < 6" class="message">
+<ng-container *ngIf="user?.roundsCompleted > 0 && user?.lastScore < 6" class="message">
   <p>Sorry, you didn't qualify for another round today.</p>
   <p>Try again tomorrow!</p>
 </ng-container>
-<ng-container *ngIf="userStats?.lastScore > 6 && userStats?.roundsRemaining === 0" class="message">
+<ng-container *ngIf="user?.lastScore > 6 && user?.roundsRemaining === 0" class="message">
   <p>You have no available rounds remaining today.</p>
   <p>Check back tomorrow!</p>
 </ng-container>
-<ng-container *ngIf="userStats?.roundsRemaining > 0 && userStats?.lastScore > 6 || userStats?.roundsCompleted === 0" class="message">
-  <p>You have {{ userStats.roundsRemaining }} available rounds remaining today.</p>
+<ng-container *ngIf="user?.roundsRemaining > 0 && user?.lastScore > 6 || user?.roundsCompleted === 0" class="message">
+  <p>You have {{ user.roundsRemaining }} available rounds remaining today.</p>
   <p>In order to qualify for another round<br> you must get at least 6/10 correct.</p>
-  <ng-container *ngIf="userStats.roundsCompleted === 0">
+  <ng-container *ngIf="user.roundsCompleted === 0">
     <p>Successfully complete 3 World Cup trivia<br> rounds to unlock additional categories!</p>
   </ng-container>
-  <ng-container *ngIf="userStats.roundsCompleted > 0">
-    <p>Successfully complete {{ 3 - userStats.roundsCompleted }} more World Cup trivia<br> round(s) to unlock additional categories!</p>
+  <ng-container *ngIf="user.roundsCompleted > 0">
+    <p>Successfully complete {{ 3 - user.roundsCompleted }} more World Cup trivia<br> round(s) to unlock additional categories!</p>
   </ng-container>
   <p class="attention">Ready?</p>
   <ion-button (click)="loadNextRound()">PLAY NEXT ROUND</ion-button>
