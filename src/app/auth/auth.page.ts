@@ -26,7 +26,6 @@ export class AuthPage implements OnInit {
       password
     };
     const response = await this.authService.login(creds);
-    console.log('response: ', response);
     if (response === 'Login failed') {
       this.failedLogin = true;
       this.isLoading = false;

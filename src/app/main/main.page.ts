@@ -13,6 +13,8 @@ export class MainPage implements OnInit {
   username: string;
   userStats;
 
+  errorMsg: string;
+
   bonusQualified = false;
   bonusDeclined = false;
 
@@ -20,7 +22,19 @@ export class MainPage implements OnInit {
 
   constructor(private router: Router, private mainService: MainService) { }
 
-  async ngOnInit() {
+  // async ngOnInit() {
+  //   const userStr = localStorage.getItem('currentUser');
+  //   if (userStr) {
+  //     const user = JSON.parse(userStr);
+  //     this.username = user.username;
+  //   } else {
+  //     this.user = this.router.getCurrentNavigation().extras.state;
+  //     this.username = this.user.user.username;
+  //   }
+  //   await this.getPlayerStats();
+  // }
+
+  ngOnInit() {
     const userStr = localStorage.getItem('currentUser');
     if (userStr) {
       const user = JSON.parse(userStr);
@@ -29,20 +43,34 @@ export class MainPage implements OnInit {
       this.user = this.router.getCurrentNavigation().extras.state;
       this.username = this.user.user.username;
     }
-    await this.getPlayerStats();
+    this.getPlayerStats();
   }
 
-  async ionViewWillEnter() {
-    await this.getPlayerStats();
+  // async ionViewWillEnter() {
+  //   await this.getPlayerStats();
+  // }
+
+  ionViewWillEnter() {
+    this.getPlayerStats();
   }
 
-  async getPlayerStats() {
-    this.user = await this.mainService.getPlayerStats(this.username);
-    console.log('this.user: ', this.user);
-    this.checkRookieTopicCompletionStatus();
+  // async getPlayerStats() {
+  //   this.user = await this.mainService.getPlayerStats(this.username);
+  //   console.log('this.user 43: ', this.user);
+  //   this.checkRookieTopicCompletionStatus();
+  // }
+
+  getPlayerStats() {
+    this.mainService.getPlayerStats(this.username).subscribe(
+      user => {
+        this.user = user;
+        this.checkRookieTopicCompletionStatus();
+      },
+      error => this.errorMsg = error,
+    );
   }
 
-  async checkRookieTopicCompletionStatus() {
+  checkRookieTopicCompletionStatus() {
     for (const topic of this.user.topics) {
       if (topic.topic !== 'starter' && topic.setsRemaining > 0) {
         console.log('topic with sets remaining: ', topic);

@@ -26,7 +26,7 @@ export class GeneralRoundPage {
     } else if (this.user.level === '3') {
         classList = 'purple-bg';
     } else if (this.user.level === '4') {
-        classList = 'crimson';
+        classList = 'crimson-bg';
     }
     return classList;
   }

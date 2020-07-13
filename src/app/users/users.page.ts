@@ -11,12 +11,15 @@ export class UsersPage implements OnInit {
   constructor(private usersService: UsersService) { }
 
   users: [];
+  errorMsg: string;
 
-  async getUsers() {
+  getUsers() {
     const userStr = localStorage.getItem('currentUser');
     const user = JSON.parse(userStr);
-    console.log('user.username: ', user.username);
-    this.users = await this.usersService.getUsers(user.username);
+    this.usersService.getUsers(user.username).subscribe(
+      users => this.users = users,
+      error => this.errorMsg = error
+    );
   }
 
   ngOnInit() {

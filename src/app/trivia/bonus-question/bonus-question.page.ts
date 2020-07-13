@@ -3,7 +3,7 @@ import { timer, Subscription } from 'rxjs';
 import { MainService } from 'src/app/main/main.service';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
-import { ModalController, AnimationController } from '@ionic/angular';
+import { ModalController } from '@ionic/angular';
 import { TriviaService } from '../trivia.service';
 import { BonusResultPage } from './bonus-result/bonus-result.page';
 
@@ -19,11 +19,11 @@ export class BonusQuestionPage implements OnInit, OnDestroy {
   answers = [];
   finalAnswer;
   answersSubmitted = false;
+  errorMsg: string;
 
   constructor(
     private router: Router,
     private modalCtlr: ModalController,
-    private animationCtrl: AnimationController,
     private triviaService: TriviaService,
     private mainService: MainService) { }
 
@@ -31,10 +31,13 @@ export class BonusQuestionPage implements OnInit, OnDestroy {
   counter = 20;
   tick = 1000;
 
-  async ngOnInit() {
+  ngOnInit() {
     this.user = this.router.getCurrentNavigation().extras.state;
     console.log('this.user: ', this.user);
-    this.bonusQuestion = await this.mainService.getBonusQuestion(this.user.user.username);
+    this.mainService.getBonusQuestion(this.user.user.username).subscribe(
+      bonusQuestion => this.bonusQuestion = bonusQuestion,
+      error => this.errorMsg = error
+    );
     console.log('this.bonusQuestion: ', this.bonusQuestion);
     this.countDown = timer(0, this.tick).subscribe(() => --this.counter);
   }

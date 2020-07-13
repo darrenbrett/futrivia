@@ -11,7 +11,7 @@ export class ApiService {
 
   sendRequest(req: string) {
     console.log(`${APIConfig.url}/${req}`);
-    return this.http.get<[]>(`${APIConfig.url}/${req}`).toPromise();
+    return this.http.get<[]>(`${APIConfig.url}/${req}`);
   }
 
   sendObjRequest(req: string) {

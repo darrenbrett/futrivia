@@ -8,16 +8,11 @@ import { Result } from '../auth/auth.model';
 })
 export class TriviaService {
 
-  private triviaSet;
-
   constructor(private apiService: ApiService, private router: Router) { }
 
-  async getNextTriviaSet(username: string, topic: string = 'starter') {
+  getNextTriviaSet(username: string, topic: string = 'starter') {
     const req = `users/next-set/${username}/${topic}`;
-    let result: object;
-    result = await this.apiService.sendRequest(req);
-    this.triviaSet = result;
-    return this.triviaSet;
+    return this.apiService.sendRequest(req);
   }
 
   async updatePlayersStats(username: string, lastCompletedSet, lastCompletedTopic: string, pointsToAdd) {

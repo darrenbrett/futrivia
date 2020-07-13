@@ -29,20 +29,24 @@ export class TriviaPage implements OnInit, OnDestroy {
   pointsToAdd = 0;
   topic;
   lastCompletedTopic: string;
+  
+  errorMsg: string;
 
   countDown: Subscription;
   counter = 90;
   tick = 1000;
 
-  async ngOnInit() {
+  ngOnInit() {
     const userStr = localStorage.getItem('currentUser');
     this.user = JSON.parse(userStr);
     this.username = this.user.username;
     this.topic = this.router.getCurrentNavigation().extras.state || { topic: 'starter' };
     this.lastCompletedTopic = this.topic.topic;
     console.log('this.topic.topic 43: ', this.topic.topic);
-    this.triviaSet = await this.triviaService.getNextTriviaSet(this.username, this.topic.topic);
-    console.log('this.triviaSet: ', this.triviaSet);
+    this.triviaSet = this.triviaService.getNextTriviaSet(this.username, this.topic.topic).subscribe(
+      triviaSet => this.triviaSet = triviaSet,
+      error => this.errorMsg = error
+    );
 
     this.countDown = timer(0, this.tick).subscribe(() => --this.counter);
   }
