@@ -1,5 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { Component, Input } from '@angular/core';
+import { ModalController, NavController } from '@ionic/angular';
 import { NavigationService } from 'src/app/navigation.service';
 
 @Component({
@@ -7,7 +7,7 @@ import { NavigationService } from 'src/app/navigation.service';
   templateUrl: './confirmation.page.html',
   styleUrls: ['./confirmation.page.scss'],
 })
-export class ConfirmationPage implements OnInit {
+export class ConfirmationPage {
 
   @Input() score;
   @Input() gamesAvailable = 2;
@@ -26,15 +26,12 @@ export class ConfirmationPage implements OnInit {
     return message;
   }
 
-  constructor(private modalCtlr: ModalController, private navService: NavigationService) { }
-
-  ngOnInit() {
-
-  }
+  constructor(private modalCtlr: ModalController, private navCtlr: NavController, private navigationService: NavigationService) { }
 
   async closeModal() {
     await this.modalCtlr.dismiss();
-    this.navService.navigateHome();
+    // this.navCtlr.navigateRoot(`/main`);
+    this.navigationService.navigateHome();
   }
 
 }

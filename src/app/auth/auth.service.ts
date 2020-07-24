@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from '../api/api.service';
 import { Router } from '@angular/router';
-import { Result } from './auth.model';
+import { Result } from './../models/auth.model';
 
 @Injectable({
   providedIn: 'root'
@@ -56,7 +56,7 @@ export class AuthService {
       // Store userDetails in localStorage
       localStorage.setItem('currentUser', JSON.stringify(result.user));
       this.router.navigateByUrl('main', {
-        state: { user: result.user }
+        state: result.user
       });
       const message = 'Logged in successfully!';
       return message;

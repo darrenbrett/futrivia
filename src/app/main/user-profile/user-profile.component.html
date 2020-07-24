@@ -1,0 +1,18 @@
+<ion-grid class="top-grid" *ngIf="user">
+  <ion-row>
+    <ion-col class="user-overview">{{ user?.displayName || user?.username }} Overview</ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>Rounds Completed: {{ user?.roundsCompleted }}</ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>Player Level: {{ user?.level ||  66  }}</ion-col>
+  </ion-row>
+  <ion-row *ngIf="user?.roundsCompleted > 0">
+    <ion-col>Latest Round Score: {{ user?.lastScore }}/10</ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>Total Points: {{ user?.points }}</ion-col>
+  </ion-row>
+</ion-grid>
+

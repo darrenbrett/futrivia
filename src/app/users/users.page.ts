@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UsersService } from './users.service';
+import { Observable } from 'rxjs';
+import { User } from './../models/user.model';
 
 @Component({
   selector: 'app-users',
@@ -10,16 +12,13 @@ export class UsersPage implements OnInit {
 
   constructor(private usersService: UsersService) { }
 
-  users: [];
+  users: Observable<User[]>;
   errorMsg: string;
 
   getUsers() {
     const userStr = localStorage.getItem('currentUser');
     const user = JSON.parse(userStr);
-    this.usersService.getUsers(user.username).subscribe(
-      users => this.users = users,
-      error => this.errorMsg = error
-    );
+    this.users = this.usersService.getUsers(user.username);
   }
 
   ngOnInit() {

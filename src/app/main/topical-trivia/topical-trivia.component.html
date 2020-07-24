@@ -1,0 +1,25 @@
+<ng-container *ngIf="user">
+  <ion-card>
+    <ng-container *ngIf="user.roundsCompleted === 3">
+      <ion-row>
+        <ion-col class="second-header"><span class="new">NEW!</span>TOPICS UNLOCKED!</ion-col>
+      </ion-row>
+    </ng-container>
+    <ng-container *ngIf="user.roundsCompleted > 3">
+      <ion-row>
+        <ion-col class="second-header">CHOOSE A TOPIC TO PLAY!</ion-col>
+      </ion-row>
+    </ng-container>
+    <ion-grid *ngFor="let topic of user.topics; let i = index">
+      <ng-container *ngIf="topic.setsRemaining > 0 && topic.topic !== 'starter'">
+        <ion-row>
+          <ion-col>
+            <ion-button (click)="playTopicalRound(topic.topic.toLowerCase())">Play {{ topic.topic | formatTopic }} Round</ion-button>
+          </ion-col>
+        </ion-row>
+      </ng-container>
+    </ion-grid>
+    <p>You have {{ user.roundsRemaining }} available rounds remaining today.</p>
+    <p>In order to qualify for another round<br> you must get at least 6/10 correct.</p><br>
+  </ion-card>
+</ng-container>

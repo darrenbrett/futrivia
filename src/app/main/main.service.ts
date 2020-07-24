@@ -13,6 +13,11 @@ export class MainService {
     return this.apiService.sendRequest(req);
   }
 
+  getPlayerStats2(username: string) {
+    const req = `users/stats/${username}`;
+    return this.apiService.sendPromRequest(req);
+  }
+
   getBonusQuestion(username: string) {
     const req = `users/next-bonus/${username}`;
     return this.apiService.sendRequest(req);

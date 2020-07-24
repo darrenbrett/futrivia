@@ -13,5 +13,6 @@ export class NavigationService {
   navigateHome() {
     const incCount = this.counter += 1;
     this.navCtlr.navigateRoot(`/main/${incCount}`);
+    // this.navCtlr.navigateRoot(`/main`);
   }
 }

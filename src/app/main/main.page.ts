@@ -1,38 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { MainService } from './main.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-main',
   templateUrl: './main.page.html',
   styleUrls: ['./main.page.scss'],
 })
-export class MainPage implements OnInit {
+export class MainPage implements OnInit, OnDestroy {
 
-  user;
+  user: any;
   username: string;
-  userStats;
-
   errorMsg: string;
-
   bonusQualified = false;
   bonusDeclined = false;
-
   rookieStatusComplete = false;
+  playerSubscription: Subscription;
 
   constructor(private router: Router, private mainService: MainService) { }
-
-  // async ngOnInit() {
-  //   const userStr = localStorage.getItem('currentUser');
-  //   if (userStr) {
-  //     const user = JSON.parse(userStr);
-  //     this.username = user.username;
-  //   } else {
-  //     this.user = this.router.getCurrentNavigation().extras.state;
-  //     this.username = this.user.user.username;
-  //   }
-  //   await this.getPlayerStats();
-  // }
 
   ngOnInit() {
     const userStr = localStorage.getItem('currentUser');
@@ -41,29 +27,20 @@ export class MainPage implements OnInit {
       this.username = user.username;
     } else {
       this.user = this.router.getCurrentNavigation().extras.state;
-      this.username = this.user.user.username;
+      this.username = this.user.username;
     }
     this.getPlayerStats();
   }
-
-  // async ionViewWillEnter() {
-  //   await this.getPlayerStats();
-  // }
 
   ionViewWillEnter() {
     this.getPlayerStats();
   }
 
-  // async getPlayerStats() {
-  //   this.user = await this.mainService.getPlayerStats(this.username);
-  //   console.log('this.user 43: ', this.user);
-  //   this.checkRookieTopicCompletionStatus();
-  // }
-
   getPlayerStats() {
-    this.mainService.getPlayerStats(this.username).subscribe(
+    this.playerSubscription = this.mainService.getPlayerStats(this.username).subscribe(
       user => {
         this.user = user;
+        console.log('this.user in main 43: ', this.user);
         this.checkRookieTopicCompletionStatus();
       },
       error => this.errorMsg = error,
@@ -82,22 +59,13 @@ export class MainPage implements OnInit {
     }
   }
 
-  playTopicalRound(topic) {
-    const joinedTopicStr  = topic.replace(/\s/g, '');
-    this.router.navigateByUrl('/trivia', {
-      state: { topic: joinedTopicStr }
-    });
-  }
-
-  async launchBonusQuestion() {
-    this.router.navigateByUrl('/bonus-question', {
-      state: { user: this.user }
-    });
-    this.bonusDeclined = true;
-  }
-
   declineBonusQuestion() {
+    console.log('declineBonusQuestion() in main fired...');
     this.bonusDeclined = true;
+  }
+
+  ngOnDestroy() {
+    this.playerSubscription.unsubscribe();
   }
 
 }

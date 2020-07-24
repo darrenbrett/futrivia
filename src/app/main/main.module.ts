@@ -10,6 +10,9 @@ import { MainPage } from './main.page';
 import { NextRoundPage } from './next-round/next-round.page';
 import { SharedModule } from './../shared/shared.module';
 import { GeneralRoundPage } from './general-round/general-round.page';
+import { TopicalTriviaComponent } from './topical-trivia/topical-trivia.component';
+import { BonusSectionComponent } from './bonus-section/bonus-section.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 
 @NgModule({
   imports: [
@@ -19,6 +22,7 @@ import { GeneralRoundPage } from './general-round/general-round.page';
     MainPageRoutingModule,
     SharedModule.forRoot()
   ],
-  declarations: [MainPage, NextRoundPage, GeneralRoundPage]
+  declarations: [MainPage, NextRoundPage, GeneralRoundPage, TopicalTriviaComponent,
+    BonusSectionComponent, UserProfileComponent]
 })
 export class MainPageModule {}

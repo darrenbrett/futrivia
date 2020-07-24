@@ -7,73 +7,18 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-grid class="top-grid">
-    <ion-row>
-      <ion-col class="user-overview">{{ user?.displayName || user?.username }} Overview</ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col>Rounds Completed: {{ user?.roundsCompleted }}</ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col>Player Level: {{ user?.level }}</ion-col>
-    </ion-row>
-    <ion-row *ngIf="user?.roundsCompleted > 0">
-      <ion-col>Latest Round Score: {{ user?.lastScore }}/10</ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col>Total Points: {{ user?.points }}</ion-col>
-    </ion-row>
-  </ion-grid>
+<ion-content *ngIf="user">
+  
+  <app-user-profile [user]="user"></app-user-profile>
 
-  <!-- Topical Question Section -->
-  <ng-container *ngIf="!rookieStatusComplete">
-    <ng-container *ngIf="user?.roundsCompleted > 2 && user?.roundsCompleted < 5 || user?.bonusCompleted === true || bonusDeclined">
-      <ion-card>
-        <ng-container *ngIf="user?.roundsCompleted === 3">
-          <ion-row>
-            <ion-col class="second-header"><span class="new">NEW!</span>TOPICS UNLOCKED!</ion-col>
-          </ion-row>
-        </ng-container>
-        <ng-container *ngIf="user?.roundsCompleted > 3">
-          <ion-row>
-            <ion-col class="second-header">CHOOSE A TOPIC TO PLAY!</ion-col>
-          </ion-row>
-        </ng-container>
-        <ion-grid *ngFor="let topic of user.topics; let i = index">
-          <ng-container *ngIf="topic.setsRemaining > 0 && topic.topic !== 'starter'">
-            <ion-row>
-              <ion-col>
-                <ion-button (click)="playTopicalRound(topic.topic.toLowerCase())">Play {{ topic.topic | formatTopic }} Round</ion-button>
-              </ion-col>
-            </ion-row>
-          </ng-container>
-        </ion-grid>
-        <p>You have {{ user.roundsRemaining }} available rounds remaining today.</p>
-        <p>In order to qualify for another round<br> you must get at least 6/10 correct.</p><br>
-      </ion-card>
-    </ng-container>
+  <ng-container *ngIf="user?.roundsCompleted > 0 && user?.lastScore < 6" class="message">
+    <p>Sorry, you didn't qualify for another round today.</p>
+    <p>Try again tomorrow!</p>
   </ng-container>
 
   <!-- Bonus Question Section -->
-  <ng-container *ngIf="user?.roundsCompleted === 5 && !bonusDeclined && user.bonusCompleted === false">
-    <ion-card>
-      <ion-row>
-        <ion-col class="second-header"><span class="new">NEW!</span>BONUS CHALLENGE UNLOCKED!</ion-col>
-      </ion-row>
-      <p>Congrats! You've qualified for a Bonus Question challenge!</p>
-      <p>If you attempt the question and get it right, you'll score a bonus 10 points!</p>
-      <p>BUT... beware, if you get it wrong you'll lose 5 points from your total score.</p>
-      <p>You will have 20 seconds to answer the question.</p>
-      <ion-grid>
-        <ion-row>
-          <ion-col>
-            <ion-button (click)="launchBonusQuestion()">Play Bonus Challenge!</ion-button>
-            <ion-button (click)="declineBonusQuestion()" color="warning">Decline</ion-button>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </ion-card>
+  <ng-container *ngIf="user?.roundsCompleted === 5 && !bonusDeclined && user.bonusCompleted === false && user?.lastScore > 5">
+    <app-bonus-section [user]=user (bonusValueChange)="declineBonusQuestion()"></app-bonus-section>
   </ng-container>
 
   <ng-container *ngIf="user?.roundsCompleted < 3 && !rookieStatusComplete">
@@ -81,10 +26,13 @@
     <app-next-round [user]="user"></app-next-round>
   </ng-container>
 
+  <!-- Topical Question Section -->
+  <ng-container *ngIf="user.roundsCompleted === 3">
+    <app-topical-trivia [user]="user"></app-topical-trivia>
+  </ng-container>
+
   <ng-container *ngIf="rookieStatusComplete">
     <app-general-round [user]="user"></app-general-round>
   </ng-container>
 
 </ion-content>
-
-

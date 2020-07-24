@@ -1,0 +1,17 @@
+<ion-card>
+  <ion-row>
+    <ion-col class="second-header"><span class="new">NEW!</span>BONUS CHALLENGE UNLOCKED!</ion-col>
+  </ion-row>
+  <p>Congrats! You've qualified for a Bonus Question challenge!</p>
+  <p>If you attempt the question and get it right, you'll score a bonus 10 points!</p>
+  <p>BUT... beware, if you get it wrong you'll lose 5 points from your total score.</p>
+  <p>You will have 20 seconds to answer the question.</p>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-button (click)="launchBonusQuestion()">Play Bonus Challenge!</ion-button>
+        <ion-button (click)="declineBonusQuestion()" color="warning">Decline</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-card>
